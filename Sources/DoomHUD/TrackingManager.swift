@@ -87,6 +87,7 @@ class TrackingManager: ObservableObject {
     @Published var hotkeyManager: HotkeyManager?
     private var statusItem: NSStatusItem?
     private var permissionCheckTimer: Timer?
+    private var initialScanTask: Task<Void, Never>?
     
     // Screenshot directory
     private var screenshotsDirectory: URL {
@@ -135,6 +136,10 @@ class TrackingManager: ObservableObject {
             startGitMonitoring()
             print("✅ Git monitoring started")
             
+            // Start background scan for today's commits
+            startInitialCommitScan()
+            print("✅ Initial commit scan started")
+            
             startPeriodicPermissionChecking()
             print("✅ Permission checking started")
             
@@ -157,6 +162,7 @@ class TrackingManager: ObservableObject {
     
     deinit {
         stopTracking()
+        initialScanTask?.cancel()
     }
     
     private func setupSessionTimer() {
@@ -886,6 +892,9 @@ extension TrackingManager {
         }
         
         if totalNewCommits > 0 {
+            // Cancel initial scan since we have real-time updates
+            initialScanTask?.cancel()
+            
             DispatchQueue.main.async {
                 self.gitCommits += totalNewCommits
                 self.lastCommitTime = Date()
@@ -925,6 +934,136 @@ extension TrackingManager {
         }
         
         return nil
+    }
+    
+    private func startInitialCommitScan() {
+        // Cancel any existing scan
+        initialScanTask?.cancel()
+        
+        initialScanTask = Task {
+            await scanForTodaysCommits()
+        }
+    }
+    
+    private func scanForTodaysCommits() async {
+        print("🔍 Scanning for today's commits...")
+        
+        let calendar = Calendar.current
+        let today = Date()
+        let startOfToday = calendar.startOfDay(for: today)
+        let endOfToday = calendar.date(byAdding: .day, value: 1, to: startOfToday) ?? Date()
+        
+        var latestCommitTime: Date?
+        var latestCommitRepo: URL?
+        var totalTodaysCommits = 0
+        
+        for repo in gitRepositories {
+            // Check if task was cancelled
+            if Task.isCancelled {
+                print("🔍 Initial commit scan cancelled")
+                return
+            }
+            
+            if let commits = await getTodaysCommits(for: repo, since: startOfToday, until: endOfToday) {
+                totalTodaysCommits += commits.count
+                
+                // Find the latest commit from today
+                if let latestInRepo = commits.max(by: { $0.date < $1.date }) {
+                    if latestCommitTime == nil || latestInRepo.date > latestCommitTime! {
+                        latestCommitTime = latestInRepo.date
+                        latestCommitRepo = repo
+                    }
+                }
+                
+                print("🔍 Found \(commits.count) commits today in \(repo.lastPathComponent)")
+            }
+        }
+        
+        // Update UI on main thread if we found commits from today
+        if totalTodaysCommits > 0, let commitTime = latestCommitTime, let commitRepo = latestCommitRepo {
+            let commitsCount = totalTodaysCommits // Capture for concurrency safety
+            await MainActor.run {
+                // Only update if this scan isn't cancelled and no new commits came in during scan
+                if !Task.isCancelled {
+                    print("🎉 Found \(commitsCount) commits from today, latest at \(commitTime)")
+                    self.gitCommits += commitsCount
+                    self.lastCommitTime = commitTime
+                    self.lastCommitProject = self.projectMappingManager.getDisplayName(for: commitRepo.path)
+                }
+            }
+        } else {
+            print("🔍 No commits found from today")
+        }
+    }
+    
+    private func getTodaysCommits(for repoURL: URL, since: Date, until: Date) async -> [(date: Date, hash: String)]? {
+        return await withCheckedContinuation { continuation in
+            DispatchQueue.global(qos: .background).async {
+                let task = Process()
+                task.executableURL = URL(fileURLWithPath: "/usr/bin/git")
+                
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                formatter.timeZone = TimeZone.current
+                
+                let sinceString = formatter.string(from: since)
+                let untilString = formatter.string(from: until)
+                
+                // Get commits from today with timestamp and hash
+                task.arguments = [
+                    "-C", repoURL.path,
+                    "log",
+                    "--since=\(sinceString)",
+                    "--until=\(untilString)",
+                    "--pretty=format:%H|%ci", // hash|commit date
+                    "--no-merges"
+                ]
+                
+                let pipe = Pipe()
+                task.standardOutput = pipe
+                task.standardError = Pipe() // Silence errors
+                
+                do {
+                    try task.run()
+                    task.waitUntilExit()
+                    
+                    if task.terminationStatus == 0 {
+                        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+                        if let output = String(data: data, encoding: .utf8) {
+                            let commits = self.parseGitLogOutput(output)
+                            continuation.resume(returning: commits)
+                            return
+                        }
+                    }
+                } catch {
+                    // Git command failed
+                }
+                
+                continuation.resume(returning: nil)
+            }
+        }
+    }
+    
+    private func parseGitLogOutput(_ output: String) -> [(date: Date, hash: String)] {
+        let lines = output.components(separatedBy: .newlines).filter { !$0.isEmpty }
+        var commits: [(date: Date, hash: String)] = []
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        
+        for line in lines {
+            let parts = line.components(separatedBy: "|")
+            if parts.count >= 2 {
+                let hash = parts[0]
+                let dateString = parts[1]
+                
+                if let date = formatter.date(from: dateString) {
+                    commits.append((date: date, hash: hash))
+                }
+            }
+        }
+        
+        return commits
     }
     
     func updateScreenshotInterval() {
