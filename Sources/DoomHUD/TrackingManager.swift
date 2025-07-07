@@ -356,6 +356,24 @@ class TrackingManager: ObservableObject {
         }
     }
     
+    private func restartTimers() {
+        // Restart screenshot timer if we have permission
+        if hasScreenRecordingPermission && screenshotTimer == nil {
+            screenshotTimer = Timer.scheduledTimer(withTimeInterval: screenshotInterval, repeats: true) { _ in
+                self.captureScreenshot()
+            }
+            print("📸 Screenshot timer restarted")
+        }
+        
+        // Restart git monitoring timer if it's not running
+        if gitTimer == nil {
+            gitTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { _ in
+                self.checkGitCommits()
+            }
+            print("🔀 Git monitoring timer restarted")
+        }
+    }
+    
     private func startTracking() {
         guard !isTracking else { return }
         
@@ -386,6 +404,9 @@ class TrackingManager: ObservableObject {
         } else {
             updateCameraStatus()
         }
+        
+        // Restart activity timers
+        restartTimers()
         
         isTracking = true
         print("✅ Tracking started (limited by permissions)")
@@ -423,18 +444,14 @@ class TrackingManager: ObservableObject {
             appObserver = nil
         }
         
-        // Stop timers
-        sessionTimer?.invalidate()
-        sessionTimer = nil
-        
+        // Stop activity timers (but keep session timer running)
         screenshotTimer?.invalidate()
         screenshotTimer = nil
         
         gitTimer?.invalidate()
         gitTimer = nil
         
-        lastCommitTimer?.invalidate()
-        lastCommitTimer = nil
+        // Note: sessionTimer and lastCommitTimer continue running during pause
         
         permissionCheckTimer?.invalidate()
         permissionCheckTimer = nil
