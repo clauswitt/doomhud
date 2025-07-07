@@ -73,20 +73,8 @@ class TrackingCoordinator: ObservableObject {
     }
     
     private func setupHotkeys() {
-        hotkeyManager.registerHotkeys(
-            pauseAction: { [weak self] in
-                self?.pauseTracking()
-            },
-            resumeAction: { [weak self] in
-                self?.resumeTracking()
-            },
-            timelapseAction: { [weak self] in
-                self?.timelapseGenerator.generateTimelapseForToday()
-            },
-            quitAction: {
-                NSApplication.shared.terminate(nil)
-            }
-        )
+        // Hotkeys are now handled by TrackingManager
+        print("📝 Note: Hotkeys are handled by TrackingManager, not TrackingCoordinator")
     }
     
     private func setupMenuBar() {

@@ -4,7 +4,14 @@
       "Bash(./run_with_logs.sh:*)",
       "Bash(pkill:*)",
       "Bash(./build_app_signed.sh:*)",
-      "Bash(swift build:*)"
+      "Bash(swift build:*)",
+      "Bash(./.build/release/DoomHUD)",
+      "Bash(git checkout:*)",
+      "Bash(timeout:*)",
+      "Bash(echo:*)",
+      "Bash(cat:*)",
+      "Bash(./.build/debug/DoomHUD:*)",
+      "Bash(rg:*)"
     ],
     "deny": []
   }

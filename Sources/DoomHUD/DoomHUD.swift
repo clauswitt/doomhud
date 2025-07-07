@@ -12,15 +12,15 @@ struct DoomHUDApp: App {
         print("🎮 Bundle path: \(Bundle.main.bundlePath)")
         print("🎮 Process: \(ProcessInfo.processInfo.processName)")
         
-        // Set the app delegate FIRST, before anything else
-        NSApplication.shared.delegate = appDelegate
-        print("🎮 App delegate set")
-        
         do {
+            // Set the app delegate FIRST, before anything else
+            NSApplication.shared.delegate = appDelegate
+            print("🎮 App delegate set")
+            
             NSApplication.shared.setActivationPolicy(.accessory)
-            print("🎮 Activation policy set successfully")
+            print("🎮 Activation policy set to accessory")
         } catch {
-            print("❌ Failed to set activation policy: \(error)")
+            print("❌ Error during initialization: \(error)")
         }
     }
     

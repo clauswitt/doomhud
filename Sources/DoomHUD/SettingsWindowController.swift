@@ -35,6 +35,7 @@ struct SettingsView: View {
         case projects = "Projects" 
         case permissions = "Permissions"
         case screenshots = "Screenshots"
+        case hotkeys = "Hotkeys"
         
         var icon: String {
             switch self {
@@ -42,6 +43,7 @@ struct SettingsView: View {
             case .projects: return "folder"
             case .permissions: return "lock"
             case .screenshots: return "camera"
+            case .hotkeys: return "keyboard"
             }
         }
     }
@@ -89,6 +91,8 @@ struct SettingsView: View {
                     PermissionsSettingsView()
                 case .screenshots:
                     ScreenshotSettingsView()
+                case .hotkeys:
+                    HotkeySettingsView()
                 }
             }
             .environmentObject(trackingManager)
@@ -120,6 +124,16 @@ struct GeneralSettingsView: View {
                         Text("Window Opacity:")
                         Slider(value: $trackingManager.hudOpacity, in: 0.3...1.0, step: 0.05)
                         Text("\(Int(trackingManager.hudOpacity * 100))%")
+                            .frame(width: 40)
+                    }
+                    
+                    HStack {
+                        Text("Screenshot Interval:")
+                        Slider(value: $trackingManager.screenshotInterval, in: 10...600, step: 10)
+                            .onChange(of: trackingManager.screenshotInterval) { _, _ in
+                                trackingManager.updateScreenshotInterval()
+                            }
+                        Text("\(Int(trackingManager.screenshotInterval))s")
                             .frame(width: 40)
                     }
                 }
@@ -436,7 +450,7 @@ struct ScreenshotSettingsView: View {
                     HStack {
                         Text("Interval:")
                         Spacer()
-                        Text("60 seconds")
+                        Text("\(Int(trackingManager.screenshotInterval)) seconds")
                             .fontWeight(.semibold)
                     }
                 }
@@ -469,9 +483,10 @@ struct ScreenshotSettingsView: View {
             GroupBox("Screenshot Options") {
                 VStack(alignment: .leading, spacing: 12) {
                     Text("• Screenshots capture all visible windows")
-                    Text("• Taken every 60 seconds automatically")
+                    Text("• Taken automatically at configurable intervals")
                     Text("• Organized by date in subfolders")
                     Text("• Include the HUD window for reference")
+                    Text("• Interval can be adjusted from 10 seconds to 10 minutes")
                 }
                 .font(.body)
                 .foregroundColor(.secondary)
@@ -482,6 +497,131 @@ struct ScreenshotSettingsView: View {
         }
         .padding(30)
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct HotkeySettingsView: View {
+    @EnvironmentObject var trackingManager: TrackingManager
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Hotkey Settings")
+                .font(.title2)
+                .fontWeight(.bold)
+                .padding(.bottom, 10)
+            
+            Text("Global keyboard shortcuts for quick actions. These work when DoomHUD is running, even when other apps are active.")
+                .font(.body)
+                .foregroundColor(.secondary)
+            
+            GroupBox("Available Hotkeys") {
+                VStack(spacing: 16) {
+                    if let hotkeyManager = trackingManager.hotkeyManager {
+                        let hotkeys = hotkeyManager.getAllHotkeys()
+                        
+                        HotkeyRow(
+                            title: "Toggle Tracking", 
+                            description: "Pause or resume all tracking",
+                            hotkey: hotkeys["Pause Tracking"] ?? "⌘⇧P"
+                        )
+                        
+                        HotkeyRow(
+                            title: "Take Screenshot",
+                            description: "Capture a screenshot immediately", 
+                            hotkey: hotkeys["Resume Tracking"] ?? "⌘⇧R"
+                        )
+                        
+                        HotkeyRow(
+                            title: "Open Screenshots",
+                            description: "Open screenshots folder in Finder",
+                            hotkey: hotkeys["Generate Timelapse"] ?? "⌘⇧T"
+                        )
+                        
+                        HotkeyRow(
+                            title: "Quit DoomHUD",
+                            description: "Exit the application completely",
+                            hotkey: hotkeys["Quit Application"] ?? "⌘⇧Q"
+                        )
+                    } else {
+                        Text("Hotkey system not initialized")
+                            .foregroundColor(.orange)
+                    }
+                }
+                .padding(16)
+            }
+            
+            GroupBox("Hotkey Status") {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Circle()
+                            .fill(trackingManager.hotkeyManager?.isEnabled == true ? .green : .red)
+                            .frame(width: 12, height: 12)
+                        
+                        Text("Hotkeys Enabled")
+                            .font(.headline)
+                            .fontWeight(.semibold)
+                    }
+                    
+                    if trackingManager.hotkeyManager?.isEnabled != true {
+                        Text("Global hotkeys may require accessibility permissions to function properly.")
+                            .font(.body)
+                            .foregroundColor(.orange)
+                    } else {
+                        Text("All hotkeys are active and ready to use.")
+                            .font(.body)
+                            .foregroundColor(.green)
+                    }
+                }
+                .padding(12)
+            }
+            
+            GroupBox("Notes") {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("• Hotkeys work system-wide when DoomHUD is running")
+                    Text("• Requires Accessibility permissions for proper function")
+                    Text("• Key combinations are currently fixed but may be customizable in future versions")
+                    Text("• Use ⌘⇧Q as emergency quit if the HUD becomes unresponsive")
+                }
+                .font(.body)
+                .foregroundColor(.secondary)
+                .padding(12)
+            }
+            
+            Spacer()
+        }
+        .padding(30)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct HotkeyRow: View {
+    let title: String
+    let description: String
+    let hotkey: String
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                
+                Text(description)
+                    .font(.body)
+                    .foregroundColor(.secondary)
+            }
+            
+            Spacer()
+            
+            Text(hotkey)
+                .font(.system(.body, design: .monospaced))
+                .fontWeight(.semibold)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(Color(NSColor.controlBackgroundColor))
+                .cornerRadius(6)
+        }
+        .padding(.vertical, 4)
     }
 }
 

@@ -2,6 +2,40 @@ import Foundation
 import Carbon
 import AppKit
 
+struct ModifierKey: OptionSet, Codable {
+    let rawValue: UInt32
+    
+    static let command = ModifierKey(rawValue: UInt32(cmdKey))
+    static let shift = ModifierKey(rawValue: UInt32(shiftKey))
+    static let option = ModifierKey(rawValue: UInt32(optionKey))
+    static let control = ModifierKey(rawValue: UInt32(controlKey))
+}
+
+struct HotkeyConfig: Codable {
+    let keyCode: Int
+    let modifiers: ModifierKey
+    
+    var displayString: String {
+        var result = ""
+        if modifiers.contains(.command) { result += "⌘" }
+        if modifiers.contains(.shift) { result += "⇧" }
+        if modifiers.contains(.option) { result += "⌥" }
+        if modifiers.contains(.control) { result += "⌃" }
+        
+        switch keyCode {
+        case kVK_ANSI_P: result += "P"
+        case kVK_ANSI_R: result += "R"
+        case kVK_ANSI_T: result += "T"
+        case kVK_ANSI_Q: result += "Q"
+        case kVK_ANSI_S: result += "S"
+        case kVK_ANSI_O: result += "O"
+        default: result += "?"
+        }
+        
+        return result
+    }
+}
+
 class HotkeyManager: ObservableObject {
     @Published var isEnabled: Bool = true
     
@@ -9,13 +43,8 @@ class HotkeyManager: ObservableObject {
     private var hotkeyActions: [String: () -> Void] = [:]
     private var eventHandler: EventHandlerRef?
     
-    // Default hotkey combinations
-    private let defaultHotkeys = [
-        "pause": (keyCode: kVK_ANSI_P, modifiers: UInt32(cmdKey | shiftKey)),
-        "resume": (keyCode: kVK_ANSI_R, modifiers: UInt32(cmdKey | shiftKey)),
-        "timelapse": (keyCode: kVK_ANSI_T, modifiers: UInt32(cmdKey | shiftKey)),
-        "quit": (keyCode: kVK_ANSI_Q, modifiers: UInt32(cmdKey | shiftKey))
-    ]
+    // Configurable hotkey combinations
+    private var hotkeyConfigs: [String: HotkeyConfig] = [:]
     
     init() {
         setupEventHandler()
@@ -58,12 +87,35 @@ class HotkeyManager: ObservableObject {
         )
         
         if status == noErr {
-            let signature = String(bytes: withUnsafeBytes(of: hotkeyID.signature) { Data($0) }, encoding: .ascii) ?? ""
-            if let action = hotkeyActions[signature] {
-                DispatchQueue.main.async {
-                    action()
+            // Find the hotkey by signature and id
+            for (hotkeyId, _) in hotkeys {
+                var testHotkeyID = EventHotKeyID()
+                switch hotkeyId {
+                case "pause":
+                    testHotkeyID.signature = OSType(0x50415553)
+                    testHotkeyID.id = 1
+                case "screenshot":
+                    testHotkeyID.signature = OSType(0x53484F54)
+                    testHotkeyID.id = 2
+                case "openfolder":
+                    testHotkeyID.signature = OSType(0x4F50454E)
+                    testHotkeyID.id = 3
+                case "quit":
+                    testHotkeyID.signature = OSType(0x51554954)
+                    testHotkeyID.id = 4
+                default:
+                    continue
                 }
-                return noErr
+                
+                if hotkeyID.signature == testHotkeyID.signature && hotkeyID.id == testHotkeyID.id {
+                    if let action = hotkeyActions[hotkeyId] {
+                        print("🔥 Executing hotkey action: \(hotkeyId)")
+                        DispatchQueue.main.async {
+                            action()
+                        }
+                        return noErr
+                    }
+                }
             }
         }
         
@@ -71,32 +123,55 @@ class HotkeyManager: ObservableObject {
     }
     
     func registerHotkeys(
-        pauseAction: @escaping () -> Void,
-        resumeAction: @escaping () -> Void,
-        timelapseAction: @escaping () -> Void,
-        quitAction: @escaping () -> Void
+        pauseConfig: HotkeyConfig, pauseAction: @escaping () -> Void,
+        screenshotConfig: HotkeyConfig, screenshotAction: @escaping () -> Void,
+        openFolderConfig: HotkeyConfig, openFolderAction: @escaping () -> Void,
+        quitConfig: HotkeyConfig, quitAction: @escaping () -> Void
     ) {
         // Clear existing hotkeys
         unregisterAllHotkeys()
         
+        // Store configurations
+        hotkeyConfigs["pause"] = pauseConfig
+        hotkeyConfigs["screenshot"] = screenshotConfig
+        hotkeyConfigs["openfolder"] = openFolderConfig
+        hotkeyConfigs["quit"] = quitConfig
+        
         // Register new hotkeys
-        registerHotkey(id: "pause", action: pauseAction)
-        registerHotkey(id: "resume", action: resumeAction)
-        registerHotkey(id: "timelapse", action: timelapseAction)
-        registerHotkey(id: "quit", action: quitAction)
+        registerHotkey(id: "pause", config: pauseConfig, action: pauseAction)
+        registerHotkey(id: "screenshot", config: screenshotConfig, action: screenshotAction)
+        registerHotkey(id: "openfolder", config: openFolderConfig, action: openFolderAction)
+        registerHotkey(id: "quit", config: quitConfig, action: quitAction)
     }
     
-    private func registerHotkey(id: String, action: @escaping () -> Void) {
-        guard let config = defaultHotkeys[id] else { return }
+    private func registerHotkey(id: String, config: HotkeyConfig, action: @escaping () -> Void) {
         
         var hotkeyID = EventHotKeyID()
-        hotkeyID.signature = OSType(id.prefix(4).padding(toLength: 4, withPad: " ", startingAt: 0).data(using: .ascii)?.withUnsafeBytes { $0.load(as: UInt32.self) } ?? 0)
-        hotkeyID.id = UInt32(id.hashValue)
+        // Use simple, unique signatures based on the id string
+        switch id {
+        case "pause":
+            hotkeyID.signature = OSType(0x50415553) // 'PAUS'
+            hotkeyID.id = 1
+        case "screenshot":
+            hotkeyID.signature = OSType(0x53484F54) // 'SHOT'
+            hotkeyID.id = 2
+        case "openfolder":
+            hotkeyID.signature = OSType(0x4F50454E) // 'OPEN'
+            hotkeyID.id = 3
+        case "quit":
+            hotkeyID.signature = OSType(0x51554954) // 'QUIT'
+            hotkeyID.id = 4
+        default:
+            hotkeyID.signature = OSType(0x44454641) // 'DEFA'
+            hotkeyID.id = 99
+        }
+        
+        print("🔧 Registering hotkey '\(id)' with signature: \(String(format: "0x%08X", hotkeyID.signature)), id: \(hotkeyID.id)")
         
         var hotkeyRef: EventHotKeyRef?
         let status = RegisterEventHotKey(
             UInt32(config.keyCode),
-            config.modifiers,
+            config.modifiers.rawValue,
             hotkeyID,
             GetEventMonitorTarget(),
             0,
@@ -104,10 +179,9 @@ class HotkeyManager: ObservableObject {
         )
         
         if status == noErr, let hotkeyRef = hotkeyRef {
-            let signature = String(bytes: withUnsafeBytes(of: hotkeyID.signature) { Data($0) }, encoding: .ascii) ?? ""
             hotkeys[id] = hotkeyRef
-            hotkeyActions[signature] = action
-            print("Registered hotkey: \(id)")
+            hotkeyActions[id] = action  // Use the id directly as key
+            print("✅ Registered hotkey: \(id)")
         } else {
             print("Failed to register hotkey: \(id), status: \(status)")
         }
@@ -116,7 +190,7 @@ class HotkeyManager: ObservableObject {
     private func unregisterAllHotkeys() {
         for (id, hotkeyRef) in hotkeys {
             UnregisterEventHotKey(hotkeyRef)
-            print("Unregistered hotkey: \(id)")
+            print("🗑️ Unregistered hotkey: \(id)")
         }
         hotkeys.removeAll()
         hotkeyActions.removeAll()
@@ -140,47 +214,12 @@ class HotkeyManager: ObservableObject {
     
     // MARK: - Hotkey Information
     
-    func getHotkeyDescription(for action: String) -> String {
-        guard let config = defaultHotkeys[action] else { return "Not configured" }
-        
-        var description = ""
-        
-        if config.modifiers & UInt32(cmdKey) != 0 {
-            description += "⌘"
-        }
-        if config.modifiers & UInt32(shiftKey) != 0 {
-            description += "⇧"
-        }
-        if config.modifiers & UInt32(optionKey) != 0 {
-            description += "⌥"
-        }
-        if config.modifiers & UInt32(controlKey) != 0 {
-            description += "⌃"
-        }
-        
-        // Convert virtual key code to character
-        let keyChar = getKeyCharacter(for: config.keyCode)
-        description += keyChar
-        
-        return description
-    }
-    
-    private func getKeyCharacter(for keyCode: Int) -> String {
-        switch keyCode {
-        case kVK_ANSI_P: return "P"
-        case kVK_ANSI_R: return "R"
-        case kVK_ANSI_T: return "T"
-        case kVK_ANSI_Q: return "Q"
-        default: return "?"
-        }
-    }
-    
     func getAllHotkeys() -> [String: String] {
         return [
-            "Pause Tracking": getHotkeyDescription(for: "pause"),
-            "Resume Tracking": getHotkeyDescription(for: "resume"),
-            "Generate Timelapse": getHotkeyDescription(for: "timelapse"),
-            "Quit Application": getHotkeyDescription(for: "quit")
+            "Pause Tracking": hotkeyConfigs["pause"]?.displayString ?? "Not configured",
+            "Take Screenshot": hotkeyConfigs["screenshot"]?.displayString ?? "Not configured", 
+            "Open Screenshots": hotkeyConfigs["openfolder"]?.displayString ?? "Not configured",
+            "Quit Application": hotkeyConfigs["quit"]?.displayString ?? "Not configured"
         ]
     }
 }

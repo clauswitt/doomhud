@@ -2,6 +2,7 @@ import SwiftUI
 import AppKit
 import AVFoundation
 import ApplicationServices
+import Carbon
 
 class TrackingManager: ObservableObject {
     @Published var mouseClicks = 0
@@ -24,6 +25,13 @@ class TrackingManager: ObservableObject {
     // Settings
     @Published var alwaysOnTop = true
     @Published var hudOpacity = 0.95
+    @Published var screenshotInterval: TimeInterval = 60.0 // 60 seconds default
+    
+    // Hotkey settings
+    @Published var pauseHotkey = HotkeyConfig(keyCode: kVK_ANSI_P, modifiers: [.command, .shift])
+    @Published var screenshotHotkey = HotkeyConfig(keyCode: kVK_ANSI_R, modifiers: [.command, .shift]) 
+    @Published var openFolderHotkey = HotkeyConfig(keyCode: kVK_ANSI_T, modifiers: [.command, .shift])
+    @Published var quitHotkey = HotkeyConfig(keyCode: kVK_ANSI_Q, modifiers: [.command, .shift])
     
     // Computed property for overall permission status
     var allPermissionsGranted: Bool {
@@ -41,11 +49,8 @@ class TrackingManager: ObservableObject {
     }
     
     private func startPeriodicPermissionChecking() {
-        // Check permissions every 5 minutes to avoid flickering
-        permissionCheckTimer = Timer.scheduledTimer(withTimeInterval: 300.0, repeats: true) { _ in
-            self.checkPermissions()
-        }
-        print("✅ Periodic permission checking started (every 5 minutes)")
+        // Periodic permission checking disabled - only check on startup and manual request
+        print("✅ Periodic permission checking disabled - manual checks only")
     }
     
     private var startTime = Date()
@@ -61,12 +66,11 @@ class TrackingManager: ObservableObject {
     private var lastCommitCounts: [URL: Int] = [:]
     private var lastCommitTime: Date?
     private var lastCommitTimer: Timer?
-    private var hotkeyManager: HotkeyManager?
+    @Published var hotkeyManager: HotkeyManager?
     private var statusItem: NSStatusItem?
     private var permissionCheckTimer: Timer?
     
-    // Screenshot settings
-    private let screenshotInterval: TimeInterval = 60.0 // 60 seconds
+    // Screenshot directory
     private var screenshotsDirectory: URL {
         let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let doomHudDir = appSupportDir.appendingPathComponent("DoomHUD/screenshots")
@@ -82,18 +86,44 @@ class TrackingManager: ObservableObject {
         print("🎯 Bundle ID: \(Bundle.main.bundleIdentifier ?? "unknown")")
         print("🎯 Executable path: \(Bundle.main.executablePath ?? "unknown")")
         
-        setupSessionTimer()
-        checkPermissions() // Just check, don't request
-        setupMenuBar()
-        
-        // Delay tracking start to avoid conflicting with early permission tap
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.startTracking() // Always start, even with limited permissions
+        do {
+            setupSessionTimer()
+            print("✅ Session timer setup complete")
+            
+            checkPermissions() // Just check, don't request
+            print("✅ Permission check complete")
+            
+            setupMenuBar()
+            print("✅ Menu bar setup complete")
+            
+            // Delay hotkey setup until after app is fully launched
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.setupHotkeys()
+                print("✅ Hotkeys setup complete")
+            }
+            
+            // Delay tracking start to avoid conflicting with early permission tap
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                print("🎯 Starting tracking...")
+                self.startTracking() // Always start, even with limited permissions
+            }
+            
+            startGitMonitoring()
+            print("✅ Git monitoring started")
+            
+            startPeriodicPermissionChecking()
+            print("✅ Permission checking started")
+            
+            // Delay screenshots until after window is ready
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                print("📸 Starting screenshots...")
+                self.startScreenshots()
+            }
+            
+            print("✅ TrackingManager initialization complete")
+        } catch {
+            print("❌ Error during TrackingManager initialization: \(error)")
         }
-        
-        startScreenshots()
-        startGitMonitoring()
-        startPeriodicPermissionChecking()
     }
     
     deinit {
@@ -311,6 +341,21 @@ class TrackingManager: ObservableObject {
         return cameraManager
     }
     
+    private func updateCameraStatus() {
+        DispatchQueue.main.async {
+            if self.hasCameraAccess {
+                if let cameraManager = self.cameraManager, cameraManager.isRunning {
+                    self.cameraStatus = "Active"
+                } else {
+                    self.cameraStatus = "Stopped"
+                }
+            } else {
+                self.cameraStatus = "No Permission"
+            }
+            print("📷 Camera status updated: \(self.cameraStatus)")
+        }
+    }
+    
     private func startTracking() {
         guard !isTracking else { return }
         
@@ -329,6 +374,18 @@ class TrackingManager: ObservableObject {
         setupMouseTracking()
         setupKeyboardTracking()
         setupContextTracking()
+        
+        // Restart camera if we have permission
+        if hasCameraAccess && cameraManager?.isRunning != true {
+            print("📷 Restarting camera...")
+            cameraManager?.startCamera()
+            // Delay status update to allow camera to start
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.updateCameraStatus()
+            }
+        } else {
+            updateCameraStatus()
+        }
         
         isTracking = true
         print("✅ Tracking started (limited by permissions)")
@@ -384,6 +441,7 @@ class TrackingManager: ObservableObject {
         
         // Stop camera
         cameraManager?.stopCamera()
+        updateCameraStatus()
         
         print("🛑 Tracking stopped")
     }
@@ -537,12 +595,12 @@ class TrackingManager: ObservableObject {
         // Take initial screenshot
         captureScreenshot()
         
-        // Setup timer for regular screenshots
+        // Setup timer for regular screenshots with dynamic interval
         screenshotTimer = Timer.scheduledTimer(withTimeInterval: screenshotInterval, repeats: true) { _ in
             self.captureScreenshot()
         }
         
-        print("✅ Screenshot timer started (60s interval)")
+        print("✅ Screenshot timer started (\(Int(screenshotInterval))s interval)")
     }
     
     private func captureScreenshot() {
@@ -823,22 +881,44 @@ extension TrackingManager {
         return nil
     }
     
+    func updateScreenshotInterval() {
+        // Restart the screenshot timer with new interval
+        screenshotTimer?.invalidate()
+        
+        if hasScreenRecordingPermission {
+            screenshotTimer = Timer.scheduledTimer(withTimeInterval: screenshotInterval, repeats: true) { _ in
+                self.captureScreenshot()
+            }
+            print("📸 Screenshot interval updated to \(Int(screenshotInterval)) seconds")
+        }
+    }
+    
     private func setupHotkeys() {
         hotkeyManager = HotkeyManager()
         
         hotkeyManager?.registerHotkeys(
+            pauseConfig: pauseHotkey,
             pauseAction: {
-                print("🔥 Hotkey: Pause tracking")
-                // Could implement pause/resume if needed
+                print("🔥 Hotkey: Pause/Resume tracking")
+                DispatchQueue.main.async {
+                    self.toggleTracking()
+                }
             },
-            resumeAction: {
-                print("🔥 Hotkey: Resume tracking")
-                // Could implement pause/resume if needed
+            screenshotConfig: screenshotHotkey,
+            screenshotAction: {
+                print("🔥 Hotkey: Take screenshot now")
+                DispatchQueue.main.async {
+                    self.captureScreenshot()
+                }
             },
-            timelapseAction: {
-                print("🔥 Hotkey: Generate timelapse")
-                // Could implement timelapse generation if needed
+            openFolderConfig: openFolderHotkey,
+            openFolderAction: {
+                print("🔥 Hotkey: Open screenshots folder")
+                DispatchQueue.main.async {
+                    self.openScreenshotsFolder()
+                }
             },
+            quitConfig: quitHotkey,
             quitAction: {
                 print("🔥 Hotkey: Quit application")
                 DispatchQueue.main.async {
@@ -847,7 +927,25 @@ extension TrackingManager {
             }
         )
         
-        print("✅ Hotkeys registered (⌘⇧Q to quit)")
+        print("✅ Hotkeys registered:")
+        for (action, hotkey) in hotkeyManager?.getAllHotkeys() ?? [:] {
+            print("   \(action): \(hotkey)")
+        }
+    }
+    
+    private func toggleTracking() {
+        if isTracking {
+            stopTracking()
+            print("⏸️ Tracking paused")
+        } else {
+            startTracking()
+            print("▶️ Tracking resumed")
+        }
+    }
+    
+    private func openScreenshotsFolder() {
+        NSWorkspace.shared.open(screenshotsDirectory)
+        print("📁 Opened screenshots folder")
     }
     
     private func setupMenuBar() {
