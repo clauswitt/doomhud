@@ -1,161 +1,79 @@
 import SwiftUI
 import AppKit
+import AVFoundation
 
 @main
-struct DoomHUDSimpleApp: App {
-    @StateObject private var appState = AppState()
+struct DoomHUDApp: App {
+    @StateObject private var trackingManager = TrackingManager()
     @StateObject private var appDelegate = AppDelegate()
     
     init() {
         print("🎮 DoomHUD Starting...")
+        print("🎮 Bundle path: \(Bundle.main.bundlePath)")
+        print("🎮 Process: \(ProcessInfo.processInfo.processName)")
         
-        // Keep app running as background utility
-        NSApplication.shared.setActivationPolicy(.accessory)
+        // Set the app delegate FIRST, before anything else
+        NSApplication.shared.delegate = appDelegate
+        print("🎮 App delegate set")
+        
+        do {
+            NSApplication.shared.setActivationPolicy(.accessory)
+            print("🎮 Activation policy set successfully")
+        } catch {
+            print("❌ Failed to set activation policy: \(error)")
+        }
     }
     
     var body: some Scene {
-        WindowGroup {
-            SimpleHUDView()
-                .environmentObject(appState)
-                .onAppear {
-                    NSApplication.shared.delegate = appDelegate
-                }
+        Window("DoomHUD", id: "main") {
+            ModernHUDView()
+                .environmentObject(trackingManager)
         }
-        .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
     }
 }
 
 class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        print("🚀 App launched - triggering Input Monitoring permission")
+        
+        // Create an event tap IMMEDIATELY to trigger the permission dialog
+        let eventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.leftMouseDown.rawValue)
+        
+        let earlyTap = CGEvent.tapCreate(
+            tap: .cgSessionEventTap,
+            place: .headInsertEventTap,
+            options: .defaultTap,
+            eventsOfInterest: CGEventMask(eventMask),
+            callback: { (proxy, type, event, refcon) -> Unmanaged<CGEvent>? in
+                // Just pass through - this is only to trigger permission
+                return Unmanaged.passUnretained(event)
+            },
+            userInfo: nil
+        )
+        
+        if let tap = earlyTap {
+            // Try to enable it to trigger permission dialog
+            let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, tap, 0)
+            CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, .commonModes)
+            CGEvent.tapEnable(tap: tap, enable: true)
+            
+            print("🔐 Early event tap created to trigger Input Monitoring prompt")
+            
+            // Clean up after a short delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                CGEvent.tapEnable(tap: tap, enable: false)
+                CFRunLoopRemoveSource(CFRunLoopGetMain(), runLoopSource, .commonModes)
+                CFMachPortInvalidate(tap)
+                print("🔐 Early event tap cleaned up")
+            }
+        } else {
+            print("❌ Failed to create early event tap - permission dialog may not appear")
+        }
+    }
+    
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return false // Keep app running
     }
 }
 
-class AppState: ObservableObject {
-    @Published var isRunning = true
-    @Published var mouseClicks = 0
-    @Published var keystrokes = 0
-    @Published var sessionTime = "00:00"
-    
-    private var startTime = Date()
-    private var timer: Timer?
-    
-    init() {
-        startTimer()
-        print("✅ AppState initialized")
-    }
-    
-    private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            self.updateSessionTime()
-        }
-    }
-    
-    private func updateSessionTime() {
-        let elapsed = Date().timeIntervalSince(startTime)
-        let minutes = Int(elapsed) / 60
-        let seconds = Int(elapsed) % 60
-        sessionTime = String(format: "%02d:%02d", minutes, seconds)
-    }
-}
-
-struct SimpleHUDView: View {
-    @EnvironmentObject var appState: AppState
-    
-    var body: some View {
-        ZStack {
-            // Background
-            Rectangle()
-                .fill(Color.black.opacity(0.8))
-                .frame(width: 800, height: 120)
-                .border(Color.green, width: 2)
-            
-            HStack(spacing: 20) {
-                // Left panel
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("DOOM HUD v1.0")
-                        .font(.system(size: 14, weight: .bold, design: .monospaced))
-                        .foregroundColor(.green)
-                    
-                    Text("Session: \(appState.sessionTime)")
-                        .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                        .foregroundColor(.yellow)
-                    
-                    Text("Status: ACTIVE")
-                        .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                        .foregroundColor(.green)
-                }
-                .frame(width: 200, alignment: .leading)
-                
-                Spacer()
-                
-                // Center - Webcam placeholder
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: 120, height: 120)
-                    .border(Color.gray, width: 1)
-                    .overlay(
-                        VStack {
-                            Text("CAM")
-                                .font(.system(size: 16, weight: .bold, design: .monospaced))
-                                .foregroundColor(.gray)
-                            Text("READY")
-                                .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                                .foregroundColor(.gray)
-                        }
-                    )
-                
-                Spacer()
-                
-                // Right panel
-                VStack(alignment: .trailing, spacing: 4) {
-                    HStack {
-                        Text("METRICS")
-                            .font(.system(size: 14, weight: .bold, design: .monospaced))
-                            .foregroundColor(.green)
-                    }
-                    
-                    Text("Mouse: \(appState.mouseClicks)")
-                        .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                        .foregroundColor(.red)
-                    
-                    Text("Keys: \(appState.keystrokes)")
-                        .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                        .foregroundColor(.cyan)
-                    
-                    Text("Git: 0")
-                        .font(.system(size: 12, weight: .semibold, design: .monospaced))
-                        .foregroundColor(.purple)
-                }
-                .frame(width: 200, alignment: .trailing)
-            }
-            .padding(.horizontal, 20)
-        }
-        .onAppear {
-            print("🎯 HUD View appeared")
-            positionWindow()
-        }
-    }
-    
-    private func positionWindow() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            if let window = NSApplication.shared.windows.first {
-                if let screen = NSScreen.main {
-                    let screenFrame = screen.visibleFrame
-                    let windowWidth: CGFloat = 800
-                    let windowHeight: CGFloat = 120
-                    
-                    let x = screenFrame.midX - (windowWidth / 2)
-                    let y = screenFrame.minY + (screenFrame.height * 0.1)
-                    
-                    window.setFrame(NSRect(x: x, y: y, width: windowWidth, height: windowHeight), display: true)
-                    window.level = .floating
-                    window.collectionBehavior = [.canJoinAllSpaces, .stationary]
-                    
-                    print("✅ Window positioned at bottom of screen")
-                }
-            }
-        }
-    }
-}

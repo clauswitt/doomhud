@@ -14,6 +14,7 @@ DerivedData/
 # Build artifacts
 DoomHUD.app/
 build/
+.build/
 
 # Dependencies
 Packages/

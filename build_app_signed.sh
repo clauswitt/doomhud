@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Build script to create proper macOS app bundle
+# Build script with proper code signing for stable permissions
 
-echo "🎮 Building DoomHUD.app..."
+echo "🎮 Building DoomHUD.app with proper code signing..."
 
 # Clean previous builds
 rm -rf DoomHUD.app .build/release
@@ -62,7 +62,7 @@ cat > DoomHUD.app/Contents/Info.plist << 'EOF'
 </plist>
 EOF
 
-# Create entitlements file for Input Monitoring
+# Create entitlements file
 cat > entitlements.plist << 'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -78,15 +78,50 @@ cat > entitlements.plist << 'EOF'
 </plist>
 EOF
 
-# Sign the app bundle with explicit identifier and timestamp
-echo "🔒 Code signing the app with explicit bundle identifier..."
-codesign --force --deep --sign - --identifier com.clauswitt.doomhud --timestamp --entitlements entitlements.plist DoomHUD.app
+# Check if we have the DoomHUD Developer certificate
+CERT_NAME="DoomHUD Developer"
+
+# First try to find it in the identity list
+cert_check=$(security find-identity -v -p codesigning | grep "$CERT_NAME")
+
+if [ ! -z "$cert_check" ]; then
+    echo "✅ Found certificate in identity list: $CERT_NAME"
+    SIGNING_IDENTITY="$CERT_NAME"
+else
+    # Try to find the certificate by hash (backup method)
+    cert_hash=$(security find-certificate -c "$CERT_NAME" -Z ~/Library/Keychains/login.keychain-db 2>/dev/null | grep "SHA-1 hash:" | head -1 | cut -d: -f2 | tr -d ' ')
+    
+    if [ ! -z "$cert_hash" ]; then
+        echo "✅ Found certificate by hash: $cert_hash"
+        echo "🔧 Certificate exists but may have access control issues"
+        SIGNING_IDENTITY="$cert_hash"
+    else
+        echo ""
+        echo "❌ No '$CERT_NAME' certificate found!"
+        echo "Please run: ./setup_codesigning_simple.sh first"
+        echo ""
+        echo "Falling back to ad-hoc signing..."
+        SIGNING_IDENTITY="-"
+    fi
+fi
+
+# Sign the app bundle
+echo "🔒 Code signing the app with identity: $SIGNING_IDENTITY"
+codesign --force --deep --sign "$SIGNING_IDENTITY" \
+    --identifier com.clauswitt.doomhud \
+    --entitlements entitlements.plist \
+    DoomHUD.app
 
 # Verify the signature
 echo "🔍 Verifying signature..."
 codesign --verify --deep --strict DoomHUD.app
 if [ $? -eq 0 ]; then
     echo "✅ Signature verification successful"
+    
+    # Show signature details
+    echo ""
+    echo "📋 Signature details:"
+    codesign -dv DoomHUD.app
 else
     echo "❌ Signature verification failed"
 fi
@@ -94,6 +129,7 @@ fi
 # Clean up
 rm entitlements.plist
 
+echo ""
 echo "✅ DoomHUD.app created successfully!"
 echo ""
 echo "🚀 To run the app:"
@@ -104,3 +140,11 @@ echo "   The app will appear as 'DoomHUD' in System Preferences > Security & Pri
 echo "   You need to grant: Accessibility, Input Monitoring, Camera, Screen Recording"
 echo ""
 echo "💀 Look for the skull emoji (💀) in your menu bar when running!"
+echo ""
+
+if [ "$SIGNING_IDENTITY" != "-" ]; then
+    echo "🎯 This build uses proper code signing - permissions should persist!"
+else
+    echo "⚠️  This build uses ad-hoc signing - permissions may not persist"
+    echo "   Run ./setup_codesigning.sh for stable permissions"
+fi
