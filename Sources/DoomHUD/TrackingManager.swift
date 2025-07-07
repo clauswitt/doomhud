@@ -22,10 +22,28 @@ class TrackingManager: ObservableObject {
     @Published var hasInputMonitoringPermission = false
     @Published var hasScreenRecordingPermission = false
     
-    // Settings
-    @Published var alwaysOnTop = true
-    @Published var hudOpacity = 0.95
-    @Published var screenshotInterval: TimeInterval = 60.0 // 60 seconds default
+    // Settings (with UserDefaults persistence)
+    @Published var alwaysOnTop: Bool {
+        didSet {
+            UserDefaults.standard.set(alwaysOnTop, forKey: "alwaysOnTop")
+        }
+    }
+    @Published var hudOpacity: Double {
+        didSet {
+            UserDefaults.standard.set(hudOpacity, forKey: "hudOpacity")
+        }
+    }
+    @Published var screenshotInterval: TimeInterval {
+        didSet {
+            UserDefaults.standard.set(screenshotInterval, forKey: "screenshotInterval")
+            // Only update the timer if we're not in initialization
+            if isInitialized {
+                updateScreenshotInterval()
+            }
+        }
+    }
+    
+    private var isInitialized = false
     
     // Hotkey settings
     @Published var pauseHotkey = HotkeyConfig(keyCode: kVK_ANSI_P, modifiers: [.command, .shift])
@@ -82,9 +100,15 @@ class TrackingManager: ObservableObject {
     }
     
     init() {
+        // Initialize settings with saved values from UserDefaults
+        self.alwaysOnTop = UserDefaults.standard.object(forKey: "alwaysOnTop") as? Bool ?? true
+        self.hudOpacity = UserDefaults.standard.object(forKey: "hudOpacity") as? Double ?? 0.95
+        self.screenshotInterval = UserDefaults.standard.object(forKey: "screenshotInterval") as? TimeInterval ?? 60.0
+        
         print("🎯 TrackingManager initializing...")
         print("🎯 Bundle ID: \(Bundle.main.bundleIdentifier ?? "unknown")")
         print("🎯 Executable path: \(Bundle.main.executablePath ?? "unknown")")
+        print("⚙️ Loaded settings - AlwaysOnTop: \(alwaysOnTop), Opacity: \(hudOpacity), Screenshot Interval: \(screenshotInterval)s")
         
         do {
             setupSessionTimer()
@@ -121,8 +145,13 @@ class TrackingManager: ObservableObject {
             }
             
             print("✅ TrackingManager initialization complete")
+            
+            // Mark as initialized to enable settings updates
+            isInitialized = true
         } catch {
             print("❌ Error during TrackingManager initialization: \(error)")
+            // Still mark as initialized even if there's an error
+            isInitialized = true
         }
     }
     

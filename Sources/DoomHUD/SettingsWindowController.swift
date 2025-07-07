@@ -9,7 +9,7 @@ class SettingsWindowController: NSWindowController {
         self.init(window: window)
         
         window.title = "DoomHUD Settings"
-        window.setContentSize(NSSize(width: 800, height: 600))
+        window.setContentSize(NSSize(width: 900, height: 700))
         window.styleMask = [.titled, .closable, .resizable]
         window.center()
         window.isReleasedWhenClosed = false
@@ -35,6 +35,7 @@ struct SettingsView: View {
         case projects = "Projects" 
         case permissions = "Permissions"
         case screenshots = "Screenshots"
+        case export = "Video Export"
         case hotkeys = "Hotkeys"
         
         var icon: String {
@@ -43,6 +44,7 @@ struct SettingsView: View {
             case .projects: return "folder"
             case .permissions: return "lock"
             case .screenshots: return "camera"
+            case .export: return "video"
             case .hotkeys: return "keyboard"
             }
         }
@@ -56,8 +58,8 @@ struct SettingsView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.horizontal, 16)
-                    .padding(.top, 20)
-                    .padding(.bottom, 16)
+                    .padding(.top, 30)
+                    .padding(.bottom, 20)
                 
                 List(SettingsTab.allCases, id: \.self, selection: $selectedTab) { tab in
                     HStack {
@@ -91,6 +93,8 @@ struct SettingsView: View {
                     PermissionsSettingsView()
                 case .screenshots:
                     ScreenshotSettingsView()
+                case .export:
+                    VideoExportSettingsView()
                 case .hotkeys:
                     HotkeySettingsView()
                 }
@@ -99,7 +103,7 @@ struct SettingsView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(NSColor.windowBackgroundColor))
         }
-        .frame(minWidth: 800, minHeight: 600)
+        .frame(minWidth: 900, minHeight: 700)
     }
 }
 
@@ -622,6 +626,366 @@ struct HotkeyRow: View {
                 .cornerRadius(6)
         }
         .padding(.vertical, 4)
+    }
+}
+
+struct VideoExportSettingsView: View {
+    @EnvironmentObject var trackingManager: TrackingManager
+    @StateObject private var videoExporter = VideoExporter()
+    @State private var selectedDate: Date?
+    @State private var fps: Int = UserDefaults.standard.object(forKey: "videoExportFPS") as? Int ?? 12
+    @State private var quality: VideoExporter.ExportSettings.VideoQuality = {
+        if let qualityString = UserDefaults.standard.string(forKey: "videoExportQuality"),
+           let savedQuality = VideoExporter.ExportSettings.VideoQuality(rawValue: qualityString) {
+            return savedQuality
+        }
+        return .medium
+    }()
+    @State private var resolution: VideoExporter.ExportSettings.VideoResolution = {
+        if let resolutionString = UserDefaults.standard.string(forKey: "videoExportResolution"),
+           let savedResolution = VideoExporter.ExportSettings.VideoResolution(rawValue: resolutionString) {
+            return savedResolution
+        }
+        return .original
+    }()
+    @State private var showingExportProgress = false
+    
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                Text("Video Export")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                
+                Text("Export daily screenshots as MP4 timelapse videos with customizable settings.")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+            
+            GroupBox("Date Selection") {
+                VStack(alignment: .leading, spacing: 12) {
+                    let availableDates = videoExporter.getAvailableDates()
+                    
+                    if availableDates.isEmpty {
+                        VStack(spacing: 8) {
+                            Image(systemName: "calendar.badge.exclamationmark")
+                                .font(.system(size: 32))
+                                .foregroundColor(.secondary)
+                            Text("No screenshot data available")
+                                .font(.headline)
+                            Text("Screenshots will appear here once DoomHUD captures some data")
+                                .font(.body)
+                                .foregroundColor(.secondary)
+                                .multilineTextAlignment(.center)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 20)
+                    } else {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Select a date to export:")
+                                .font(.headline)
+                                .padding(.bottom, 8)
+                            
+                            CalendarView(
+                                availableDates: availableDates,
+                                selectedDate: $selectedDate,
+                                videoExporter: videoExporter
+                            )
+                            .frame(height: 200)
+                        }
+                        
+                        if let selectedDate = selectedDate {
+                            let screenshotCount = videoExporter.getScreenshotCount(for: selectedDate)
+                            HStack {
+                                Text("Selected: \(selectedDate, style: .date)")
+                                    .font(.headline)
+                                Spacer()
+                                Text("\(screenshotCount) screenshots")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding(.top, 8)
+                        }
+                    }
+                }
+                .padding(12)
+            }
+            
+            GroupBox("Export Settings") {
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        Text("Frames per second:")
+                            .frame(width: 120, alignment: .leading)
+                        Slider(value: Binding(
+                            get: { Double(fps) },
+                            set: { 
+                                fps = Int($0)
+                                UserDefaults.standard.set(fps, forKey: "videoExportFPS")
+                            }
+                        ), in: 1...60, step: 1)
+                        Text("\(fps) fps")
+                            .frame(width: 50)
+                    }
+                    
+                    HStack {
+                        Text("Video quality:")
+                            .frame(width: 120, alignment: .leading)
+                        Picker("Quality", selection: $quality) {
+                            ForEach(VideoExporter.ExportSettings.VideoQuality.allCases, id: \.self) { quality in
+                                Text(quality.rawValue).tag(quality)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .onChange(of: quality) { _, newValue in
+                            UserDefaults.standard.set(newValue.rawValue, forKey: "videoExportQuality")
+                        }
+                    }
+                    
+                    HStack {
+                        Text("Resolution:")
+                            .frame(width: 120, alignment: .leading)
+                        Picker("Resolution", selection: $resolution) {
+                            ForEach(VideoExporter.ExportSettings.VideoResolution.allCases, id: \.self) { resolution in
+                                Text(resolution.rawValue).tag(resolution)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                        .onChange(of: resolution) { _, newValue in
+                            UserDefaults.standard.set(newValue.rawValue, forKey: "videoExportResolution")
+                        }
+                    }
+                }
+                .padding(12)
+            }
+            
+            GroupBox("Export") {
+                VStack(spacing: 12) {
+                    if videoExporter.isExporting {
+                        VStack(spacing: 8) {
+                            ProgressView(value: videoExporter.exportProgress)
+                            Text(videoExporter.exportStatus)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            Button("Cancel Export") {
+                                videoExporter.cancelExport()
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                    } else {
+                        Button("Export Timelapse") {
+                            guard let date = selectedDate else { return }
+                            
+                            let settings = VideoExporter.ExportSettings(
+                                fps: fps,
+                                quality: quality,
+                                resolution: resolution
+                            )
+                            
+                            Task {
+                                await videoExporter.exportTimelapseForDate(date, settings: settings)
+                                
+                                // Auto-open Finder when export completes
+                                if let lastVideo = videoExporter.lastExportedVideo {
+                                    print("🔍 Auto-opening Finder for: \(lastVideo.path)")
+                                    NSWorkspace.shared.activateFileViewerSelecting([lastVideo])
+                                }
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .disabled(selectedDate == nil)
+                        
+                        Text(videoExporter.exportStatus)
+                            .font(.caption)
+                            .foregroundColor(videoExporter.exportStatus.contains("failed") ? .red : .secondary)
+                    }
+                }
+                .padding(12)
+            }
+            
+            Spacer()
+            }
+        }
+        .padding(30)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .onAppear {
+            // Set default selected date to the latest available date
+            let availableDates = videoExporter.getAvailableDates()
+            if let latestDate = availableDates.first {
+                selectedDate = latestDate
+            }
+        }
+    }
+}
+
+struct CalendarView: View {
+    let availableDates: [Date]
+    @Binding var selectedDate: Date?
+    let videoExporter: VideoExporter
+    
+    @State private var currentMonth = Date()
+    private let calendar = Calendar.current
+    private let dateFormatter = DateFormatter()
+    
+    init(availableDates: [Date], selectedDate: Binding<Date?>, videoExporter: VideoExporter) {
+        self.availableDates = availableDates
+        self._selectedDate = selectedDate
+        self.videoExporter = videoExporter
+        
+        // Set current month to the latest available date's month
+        if let latestDate = availableDates.first {
+            self._currentMonth = State(initialValue: latestDate)
+        }
+    }
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            // Month header with navigation
+            HStack {
+                Button(action: { moveMonth(-1) }) {
+                    Image(systemName: "chevron.left")
+                }
+                .disabled(!hasPreviousMonth)
+                
+                Spacer()
+                
+                Text(currentMonth, format: .dateTime.month(.wide).year())
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                
+                Spacer()
+                
+                Button(action: { moveMonth(1) }) {
+                    Image(systemName: "chevron.right")
+                }
+                .disabled(!hasNextMonth)
+            }
+            .padding(.horizontal)
+            
+            // Weekday headers
+            HStack(spacing: 0) {
+                ForEach(calendar.shortWeekdaySymbols, id: \.self) { weekday in
+                    Text(weekday)
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity)
+                }
+            }
+            
+            // Calendar grid
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 6) {
+                ForEach(daysInMonth, id: \.self) { date in
+                    if let date = date {
+                        DayView(
+                            date: date,
+                            isSelected: calendar.isDate(date, inSameDayAs: selectedDate ?? Date.distantPast),
+                            hasScreenshots: availableDates.contains { calendar.isDate($0, inSameDayAs: date) },
+                            onTap: {
+                                if availableDates.contains(where: { calendar.isDate($0, inSameDayAs: date) }) {
+                                    selectedDate = date
+                                }
+                            }
+                        )
+                    } else {
+                        // Empty cell for days not in current month
+                        Color.clear
+                            .frame(height: 36)
+                    }
+                }
+            }
+        }
+    }
+    
+    private var daysInMonth: [Date?] {
+        guard let monthInterval = calendar.dateInterval(of: .month, for: currentMonth),
+              let firstOfMonth = calendar.dateInterval(of: .month, for: currentMonth)?.start else {
+            return []
+        }
+        
+        let firstWeekday = calendar.component(.weekday, from: firstOfMonth)
+        let daysInMonth = calendar.range(of: .day, in: .month, for: currentMonth)?.count ?? 0
+        
+        var days: [Date?] = []
+        
+        // Add empty cells for days before the first day of the month
+        for _ in 1..<firstWeekday {
+            days.append(nil)
+        }
+        
+        // Add days of the month
+        for day in 1...daysInMonth {
+            if let date = calendar.date(byAdding: .day, value: day - 1, to: firstOfMonth) {
+                days.append(date)
+            }
+        }
+        
+        return days
+    }
+    
+    private var hasPreviousMonth: Bool {
+        availableDates.contains { calendar.dateInterval(of: .month, for: $0)?.start ?? Date() < calendar.dateInterval(of: .month, for: currentMonth)?.start ?? Date() }
+    }
+    
+    private var hasNextMonth: Bool {
+        availableDates.contains { calendar.dateInterval(of: .month, for: $0)?.start ?? Date() > calendar.dateInterval(of: .month, for: currentMonth)?.start ?? Date() }
+    }
+    
+    private func moveMonth(_ direction: Int) {
+        if let newMonth = calendar.date(byAdding: .month, value: direction, to: currentMonth) {
+            currentMonth = newMonth
+        }
+    }
+}
+
+struct DayView: View {
+    let date: Date
+    let isSelected: Bool
+    let hasScreenshots: Bool
+    let onTap: () -> Void
+    
+    private let calendar = Calendar.current
+    
+    var body: some View {
+        VStack(spacing: 2) {
+            Text("\(calendar.component(.day, from: date))")
+                .font(.system(size: 14, weight: isSelected ? .semibold : .regular))
+                .foregroundColor(dayTextColor)
+            
+            // Dot indicator for days with screenshots
+            Circle()
+                .fill(hasScreenshots ? .blue : .clear)
+                .frame(width: 4, height: 4)
+        }
+        .frame(width: 32, height: 32)
+        .background(backgroundContent)
+        .clipShape(RoundedRectangle(cornerRadius: 6))
+        .onTapGesture {
+            if hasScreenshots {
+                onTap()
+            }
+        }
+        .opacity(hasScreenshots ? 1.0 : 0.3)
+    }
+    
+    private var dayTextColor: Color {
+        if isSelected {
+            return .white
+        } else if hasScreenshots {
+            return .primary
+        } else {
+            return .secondary
+        }
+    }
+    
+    @ViewBuilder
+    private var backgroundContent: some View {
+        if isSelected {
+            Color.blue
+        } else if hasScreenshots {
+            Color.blue.opacity(0.1)
+        } else {
+            Color.clear
+        }
     }
 }
 
