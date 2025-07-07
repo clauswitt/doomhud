@@ -1,0 +1,1501 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.DoomHUD-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/sources",
+      "importPath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/HotkeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/MenuBarManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Database/DatabaseManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/DoomHUD.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Models/DataModels.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/ScreenshotManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/TimelapseGenerator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/ActivityDetector.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/ContextTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/GitTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/KeystrokeTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/MouseTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/PermissionManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/TrackingCoordinator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/WebcamManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/DoomColors.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/HUDWindow.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/MetricDisplayView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/WebcamView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/Modules/SQLite.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "DoomHUD",
+      "moduleOutputPath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/Modules/DoomHUD.swiftmodule",
+      "objects" : [
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContentView.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HotkeyManager.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MenuBarManager.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomHUD.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DataModels.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ScreenshotManager.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TimelapseGenerator.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ActivityDetector.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContextTracker.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/GitTracker.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/KeystrokeTracker.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MouseTracker.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/PermissionManager.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TrackingCoordinator.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamManager.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomColors.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HUDWindow.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MetricDisplayView.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamView.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j12",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "DoomHUD_main",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "doomhud"
+      ],
+      "outputFileMapPath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HotkeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MenuBarManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomHUD.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DataModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ScreenshotManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TimelapseGenerator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ActivityDetector.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContextTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/GitTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/KeystrokeTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MouseTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/PermissionManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TrackingCoordinator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomColors.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HUDWindow.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MetricDisplayView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/Modules/DoomHUD.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/ContentView.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/HotkeyManager.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/MenuBarManager.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Database/DatabaseManager.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/DoomHUD.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Models/DataModels.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/ScreenshotManager.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/TimelapseGenerator.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/ActivityDetector.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/ContextTracker.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/GitTracker.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/KeystrokeTracker.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/MouseTracker.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/PermissionManager.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/TrackingCoordinator.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/WebcamManager.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/DoomColors.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/HUDWindow.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/MetricDisplayView.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/WebcamView.swift"
+      ],
+      "tempsPath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.SQLite-arm64-apple-macosx15.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/sources",
+      "importPath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Backup.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Blob.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Aggregation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Attach.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Pragmas.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Errors.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Result.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/SQLiteFeature.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/SQLiteVersion.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Statement.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/URIQueryParameter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Value.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/Cipher.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/FTS4.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/FTS5.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/RTree.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Foundation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Helpers.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/Connection+Schema.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaChanger.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaDefinitions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaReader.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/AggregateFunctions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Coding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Collation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/CoreFunctions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/CustomFunctions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/DateAndTimeFunctions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Expression.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Operators.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Query+with.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Query.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Schema.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Setter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/WindowFunctions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SQLite",
+      "moduleOutputPath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/Modules/SQLite.swiftmodule",
+      "objects" : [
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Backup.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Blob.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Aggregation.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Attach.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Pragmas.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Errors.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Result.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SQLiteFeature.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SQLiteVersion.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Statement.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/URIQueryParameter.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Value.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Cipher.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/FTS4.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/FTS5.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/RTree.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Foundation.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Helpers.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Schema.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SchemaChanger.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SchemaDefinitions.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SchemaReader.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/AggregateFunctions.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Coding.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Collation.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/CoreFunctions.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/CustomFunctions.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/DateAndTimeFunctions.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Expression.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Operators.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Query+with.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Query.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Schema.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Setter.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/WindowFunctions.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j12",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SQLite-Swift.h",
+        "-color-diagnostics",
+        "-swift-version",
+        "5",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-suppress-warnings",
+        "-package-name",
+        "sqlite_swift"
+      ],
+      "outputFileMapPath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Backup.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Blob.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Aggregation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Attach.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Pragmas.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Errors.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Result.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SQLiteFeature.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SQLiteVersion.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Statement.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/URIQueryParameter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Value.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Cipher.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/FTS4.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/FTS5.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/RTree.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Foundation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Helpers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Schema.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SchemaChanger.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SchemaDefinitions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SchemaReader.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/AggregateFunctions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Coding.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Collation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/CoreFunctions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/CustomFunctions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/DateAndTimeFunctions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Expression.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Operators.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Query+with.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Query.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Schema.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Setter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/WindowFunctions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/Modules/SQLite.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Backup.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Blob.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Aggregation.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Attach.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Pragmas.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Errors.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Result.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/SQLiteFeature.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/SQLiteVersion.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Statement.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/URIQueryParameter.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Value.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/Cipher.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/FTS4.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/FTS5.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/RTree.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Foundation.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Helpers.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/Connection+Schema.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaChanger.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaDefinitions.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaReader.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/AggregateFunctions.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Coding.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Collation.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/CoreFunctions.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/CustomFunctions.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/DateAndTimeFunctions.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Expression.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Operators.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Query+with.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Query.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Schema.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Setter.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/WindowFunctions.swift"
+      ],
+      "tempsPath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "DoomHUD" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "DoomHUD",
+      "-package-name",
+      "doomhud",
+      "-incremental",
+      "-c",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/ContentView.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/HotkeyManager.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/MenuBarManager.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Database/DatabaseManager.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/DoomHUD.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Models/DataModels.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/ScreenshotManager.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/TimelapseGenerator.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/ActivityDetector.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/ContextTracker.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/GitTracker.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/KeystrokeTracker.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/MouseTracker.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/PermissionManager.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/TrackingCoordinator.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/WebcamManager.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/DoomColors.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/HUDWindow.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/MetricDisplayView.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/WebcamView.swift",
+      "-I",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j12",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "DoomHUD_main",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "doomhud",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "SQLite" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "SQLite",
+      "-package-name",
+      "sqlite_swift",
+      "-incremental",
+      "-c",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Backup.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Blob.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Aggregation.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Attach.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Pragmas.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Errors.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Result.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/SQLiteFeature.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/SQLiteVersion.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Statement.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/URIQueryParameter.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Value.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/Cipher.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/FTS4.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/FTS5.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/RTree.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Foundation.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Helpers.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/Connection+Schema.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaChanger.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaDefinitions.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaReader.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/AggregateFunctions.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Coding.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Collation.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/CoreFunctions.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/CustomFunctions.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/DateAndTimeFunctions.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Expression.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Operators.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Query+with.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Query.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Schema.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Setter.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/WindowFunctions.swift",
+      "-I",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx10.13",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j12",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SQLite-Swift.h",
+      "-color-diagnostics",
+      "-swift-version",
+      "5",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-suppress-warnings",
+      "-package-name",
+      "sqlite_swift",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "DoomHUD" : [
+      "SQLite"
+    ],
+    "SQLite" : [
+
+    ],
+    "SwiftToolchainCSQLite" : [
+
+    ],
+    "sqlite" : [
+      "SwiftToolchainCSQLite"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "enableAllTraits" : false
+  },
+  "writeCommands" : {
+    "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD-entitlement.plist"
+    },
+    "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/HotkeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/MenuBarManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Database/DatabaseManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/DoomHUD.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Models/DataModels.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/ScreenshotManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/TimelapseGenerator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/ActivityDetector.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/ContextTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/GitTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/KeystrokeTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/MouseTracker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/PermissionManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/TrackingCoordinator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/WebcamManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/DoomColors.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/HUDWindow.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/MetricDisplayView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/WebcamView.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/sources"
+    },
+    "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ActivityDetector.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContextTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DataModels.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomColors.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomHUD.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/GitTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HUDWindow.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HotkeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/KeystrokeTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MenuBarManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MetricDisplayView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MouseTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/PermissionManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ScreenshotManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TimelapseGenerator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TrackingCoordinator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/AggregateFunctions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Backup.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Blob.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Cipher.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Coding.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Collation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Aggregation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Attach.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Pragmas.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection+Schema.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Connection.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/CoreFunctions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/CustomFunctions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/DateAndTimeFunctions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Errors.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Expression.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/FTS4.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/FTS5.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Foundation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Helpers.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Operators.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Query+with.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Query.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/RTree.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Result.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SQLiteFeature.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SQLiteVersion.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Schema.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SchemaChanger.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SchemaDefinitions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SchemaReader.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Setter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Statement.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/URIQueryParameter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/Value.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/WindowFunctions.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.product/Objects.LinkFileList"
+    },
+    "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Backup.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Blob.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Aggregation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Attach.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection+Pragmas.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Connection.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Errors.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Result.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/SQLiteFeature.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/SQLiteVersion.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Statement.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/URIQueryParameter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Core/Value.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/Cipher.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/FTS4.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/FTS5.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Extensions/RTree.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Foundation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Helpers.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/Connection+Schema.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaChanger.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaDefinitions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Schema/SchemaReader.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/AggregateFunctions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Coding.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Collation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/CoreFunctions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/CustomFunctions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/DateAndTimeFunctions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Expression.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Operators.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Query+with.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Query.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Schema.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/Setter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/SQLite.swift/Sources/SQLite/Typed/WindowFunctions.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/sources"
+    },
+    "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/sqlite-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/sqlite-entitlement.plist"
+    },
+    "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/sqlite.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SwiftToolchainCSQLite.build/sqlite3.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/sqlite.build/shell.c.o"
+        }
+      ],
+      "outputFilePath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/sqlite.product/Objects.LinkFileList"
+    },
+    "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

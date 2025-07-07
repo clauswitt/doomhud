@@ -1,0 +1,125 @@
+{
+  "": {
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/master.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/ContentView.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContentView.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContentView.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContentView~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContentView.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/HotkeyManager.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HotkeyManager.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HotkeyManager.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HotkeyManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HotkeyManager.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/MenuBarManager.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MenuBarManager.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MenuBarManager.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MenuBarManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MenuBarManager.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Database/DatabaseManager.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/DoomHUD.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomHUD.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomHUD.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomHUD~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomHUD.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Models/DataModels.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DataModels.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DataModels.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DataModels~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DataModels.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/ScreenshotManager.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ScreenshotManager.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ScreenshotManager.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ScreenshotManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ScreenshotManager.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/TimelapseGenerator.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TimelapseGenerator.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TimelapseGenerator.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TimelapseGenerator~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TimelapseGenerator.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/ActivityDetector.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ActivityDetector.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ActivityDetector.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ActivityDetector~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ActivityDetector.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/ContextTracker.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContextTracker.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContextTracker.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContextTracker~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ContextTracker.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/GitTracker.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/GitTracker.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/GitTracker.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/GitTracker~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/GitTracker.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/KeystrokeTracker.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/KeystrokeTracker.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/KeystrokeTracker.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/KeystrokeTracker~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/KeystrokeTracker.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/MouseTracker.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MouseTracker.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MouseTracker.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MouseTracker~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MouseTracker.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/PermissionManager.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/PermissionManager.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/PermissionManager.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/PermissionManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/PermissionManager.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/TrackingCoordinator.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TrackingCoordinator.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TrackingCoordinator.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TrackingCoordinator~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/TrackingCoordinator.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Tracking/WebcamManager.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamManager.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamManager.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamManager.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/DoomColors.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomColors.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomColors.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomColors~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomColors.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/HUDWindow.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HUDWindow.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HUDWindow.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HUDWindow~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HUDWindow.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/MetricDisplayView.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MetricDisplayView.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MetricDisplayView.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MetricDisplayView~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MetricDisplayView.swiftdeps"
+  },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/UI/WebcamView.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamView.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamView.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamView~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/WebcamView.swiftdeps"
+  }
+}

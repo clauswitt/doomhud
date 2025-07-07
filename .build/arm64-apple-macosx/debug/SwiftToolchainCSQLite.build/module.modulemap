@@ -1,0 +1,4 @@
+module SwiftToolchainCSQLite {
+    umbrella "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/checkouts/swift-toolchain-sqlite/Sources/CSQLite/include"
+    export *
+}
