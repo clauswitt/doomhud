@@ -26,6 +26,12 @@
     "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager~partial.swiftmodule",
     "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager.swiftdeps"
   },
+  "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Debug/Logger.swift": {
+    "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/Logger.d",
+    "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/Logger.swift.o",
+    "swiftmodule": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/Logger~partial.swiftmodule",
+    "swift-dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/Logger.swiftdeps"
+  },
   "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/DoomHUD.swift": {
     "dependencies": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomHUD.d",
     "object": "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomHUD.swift.o",

@@ -40,6 +40,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Debug/Logger.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/DoomHUD.swift"
         },
         {
@@ -123,6 +127,7 @@
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/HotkeyManager.swift.o",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/MenuBarManager.swift.o",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager.swift.o",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/Logger.swift.o",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DoomHUD.swift.o",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DataModels.swift.o",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/ScreenshotManager.swift.o",
@@ -158,7 +163,6 @@
         "-entry-point-function-name",
         "-Xfrontend",
         "DoomHUD_main",
-        "-color-diagnostics",
         "-swift-version",
         "5",
         "-sdk",
@@ -208,6 +212,10 @@
         {
           "kind" : "file",
           "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/DatabaseManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/Logger.swift.o"
         },
         {
           "kind" : "file",
@@ -284,6 +292,7 @@
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/HotkeyManager.swift",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/MenuBarManager.swift",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Database/DatabaseManager.swift",
+        "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Debug/Logger.swift",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/DoomHUD.swift",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Models/DataModels.swift",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/ScreenshotManager.swift",
@@ -521,7 +530,6 @@
         "-emit-objc-header",
         "-emit-objc-header-path",
         "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SQLite-Swift.h",
-        "-color-diagnostics",
         "-swift-version",
         "5",
         "-sdk",
@@ -765,6 +773,7 @@
       "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/HotkeyManager.swift",
       "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Controls/MenuBarManager.swift",
       "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Database/DatabaseManager.swift",
+      "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Debug/Logger.swift",
       "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/DoomHUD.swift",
       "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Models/DataModels.swift",
       "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Screenshot/ScreenshotManager.swift",
@@ -800,7 +809,6 @@
       "-entry-point-function-name",
       "-Xfrontend",
       "DoomHUD_main",
-      "-color-diagnostics",
       "-swift-version",
       "5",
       "-sdk",
@@ -898,7 +906,6 @@
       "-emit-objc-header",
       "-emit-objc-header-path",
       "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/SQLite.build/SQLite-Swift.h",
-      "-color-diagnostics",
       "-swift-version",
       "5",
       "-sdk",
@@ -995,6 +1002,10 @@
         {
           "kind" : "file",
           "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Database/DatabaseManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/Sources/DoomHUD/Debug/Logger.swift"
         },
         {
           "kind" : "file",
@@ -1113,6 +1124,10 @@
         {
           "kind" : "file",
           "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/KeystrokeTracker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/clauswitt/Documents/Projects/Personal/DoomHud/.build/arm64-apple-macosx/debug/DoomHUD.build/Logger.swift.o"
         },
         {
           "kind" : "file",

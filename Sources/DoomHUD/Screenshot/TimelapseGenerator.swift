@@ -43,7 +43,7 @@ class TimelapseGenerator: ObservableObject {
             return
         }
         
-        let sessionId = AppState.shared.sessionId.uuidString.prefix(8)
+        let sessionId = GitAppState.shared.sessionId.uuidString.prefix(8)
         generateTimelapse(from: sessionScreenshots, outputName: "session_\(sessionId)_\(getTodayString()).mp4")
     }
     
@@ -180,7 +180,7 @@ class TimelapseGenerator: ObservableObject {
                         // Save to database
                         let duration = Double(totalFrames) / Double(self.frameRate)
                         let fileSize = self.getFileSize(at: outputURL)
-                        let sessionId = AppState.shared.sessionId
+                        let sessionId = GitAppState.shared.sessionId
                         
                         let timelapse = TimelapseVideo(
                             filePath: outputURL.path,
@@ -302,7 +302,7 @@ class TimelapseGenerator: ObservableObject {
     }
     
     private func getSessionScreenshots(in directory: URL) -> [URL] {
-        let sessionStartTime = AppState.shared.sessionStartTime
+        let sessionStartTime = GitAppState.shared.sessionStartTime
         let allScreenshots = getScreenshotFiles(in: directory)
         
         return allScreenshots.filter { url in

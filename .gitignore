@@ -1,0 +1,41 @@
+# Swift Package Manager
+.build/
+*.xcodeproj/
+*.xcworkspace/
+
+# Xcode
+DerivedData/
+.swiftpm/
+
+# macOS
+.DS_Store
+*.app/
+
+# Build artifacts
+DoomHUD.app/
+build/
+
+# Dependencies
+Packages/
+.swiftpm/
+Package.resolved
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Database files (for development)
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+
+# Screenshots and timelapses (user data)
+screenshots/
+timelapses/
+
+# Temporary files
+*.tmp
+*.temp

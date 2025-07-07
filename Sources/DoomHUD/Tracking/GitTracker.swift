@@ -75,7 +75,7 @@ class GitTracker: ObservableObject {
         var totalWeekCommits = 0
         
         for directory in gitDirectories {
-            let sessionCommitsForRepo = getCommitCount(in: directory, since: AppState.shared.sessionStartTime)
+            let sessionCommitsForRepo = getCommitCount(in: directory, since: GitAppState.shared.sessionStartTime)
             let todayCommitsForRepo = getCommitCount(in: directory, since: startOfDay)
             let weekCommitsForRepo = getCommitCount(in: directory, since: startOfWeek)
             
@@ -170,8 +170,8 @@ class GitTracker: ObservableObject {
 }
 
 // Simple app state to track session start time
-class AppState {
-    static let shared = AppState()
+class GitAppState {
+    static let shared = GitAppState()
     let sessionStartTime = Date()
     
     private init() {}

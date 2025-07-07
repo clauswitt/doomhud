@@ -134,7 +134,7 @@ class ScreenshotManager: ObservableObject {
                 
                 // Save to database
                 let fileSize = self.getFileSize(at: filePath)
-                let sessionId = AppState.shared.sessionId
+                let sessionId = GitAppState.shared.sessionId
                 
                 let screenshot = Screenshot(
                     filePath: filePath.path,
@@ -232,8 +232,8 @@ class ScreenshotManager: ObservableObject {
     }
 }
 
-// Extension to AppState for session tracking
-extension AppState {
+// Extension to GitAppState for session tracking
+extension GitAppState {
     var sessionId: UUID {
         if let storedId = UserDefaults.standard.string(forKey: "current_session_id"),
            let uuid = UUID(uuidString: storedId) {

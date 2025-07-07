@@ -2,9 +2,13 @@
 
 # Build script to create proper macOS app bundle
 
-echo "Building DoomHUD.app..."
+echo "🎮 Building DoomHUD.app..."
+
+# Clean previous builds
+rm -rf DoomHUD.app .build/release
 
 # Build the executable
+echo "📦 Compiling..."
 swift build -c release
 
 # Create app bundle structure
@@ -55,5 +59,12 @@ cat > DoomHUD.app/Contents/Info.plist << 'EOF'
 EOF
 
 echo "✅ DoomHUD.app created successfully!"
-echo "📁 You can now run: open DoomHUD.app"
-echo "🔒 The app will appear as 'DoomHUD' in System Preferences > Security & Privacy"
+echo ""
+echo "🚀 To run the app:"
+echo "   open DoomHUD.app"
+echo ""
+echo "🔒 For permissions:"
+echo "   The app will appear as 'DoomHUD' in System Preferences > Security & Privacy"
+echo "   You need to grant: Accessibility, Input Monitoring, Camera, Screen Recording"
+echo ""
+echo "💀 Look for the skull emoji (💀) in your menu bar when running!"

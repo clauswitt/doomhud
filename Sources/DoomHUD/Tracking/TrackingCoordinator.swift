@@ -147,13 +147,16 @@ class TrackingCoordinator: ObservableObject {
     func startTracking() {
         guard !isTracking else { return }
         
+        DoomLogger.logInfo("🚀 Starting tracking...")
+        
         // Check permissions first
         permissionManager.checkAllPermissions()
         
         if !permissionManager.allPermissionsGranted {
-            print("Missing permissions: \(permissionManager.missingPermissions)")
-            permissionManager.requestAllPermissions()
-            return
+            DoomLogger.logWarning("Missing permissions: \(permissionManager.missingPermissions.joined(separator: ", "))")
+            
+            // Continue with limited functionality instead of blocking
+            DoomLogger.logInfo("⚠️ Running with limited functionality")
         }
         
         // Start all trackers
