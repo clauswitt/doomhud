@@ -10,6 +10,7 @@ class TrackingManager: ObservableObject {
     @Published var gitCommits = 0
     @Published var lastCommitProject = "None"
     @Published var timeSinceLastCommit = "Never"
+    @Published var projectMappingManager = ProjectMappingManager()
     @Published var sessionTime = "00:00"
     @Published var cameraStatus = "Requesting..."
     @Published var hasCameraAccess = false
@@ -737,6 +738,11 @@ extension TrackingManager {
             if let count = getCommitCount(for: url) {
                 lastCommitCounts[url] = count
             }
+            
+            // Register project in mapping manager
+            DispatchQueue.main.async {
+                let _ = self.projectMappingManager.addProject(at: url.path)
+            }
             return // Don't scan subdirectories of git repos
         }
         
@@ -781,16 +787,8 @@ extension TrackingManager {
                 self.lastCommitTime = Date()
                 
                 if let repo = latestCommitRepo {
-                    // Extract project name from path
-                    let pathComponents = repo.pathComponents
-                    if let projectsIndex = pathComponents.firstIndex(of: "Projects"),
-                       projectsIndex + 1 < pathComponents.count {
-                        // Get the project name (could be PROJECT_TYPE/PROJECT_NAME or just PROJECT_NAME)
-                        let remainingComponents = Array(pathComponents[(projectsIndex + 1)...])
-                        self.lastCommitProject = remainingComponents.joined(separator: "/")
-                    } else {
-                        self.lastCommitProject = repo.lastPathComponent
-                    }
+                    // Use project mapping manager to get display name
+                    self.lastCommitProject = self.projectMappingManager.getDisplayName(for: repo.path)
                 }
                 
                 print("🎉 Total git commits: \(self.gitCommits)")

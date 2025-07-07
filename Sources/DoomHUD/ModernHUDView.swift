@@ -3,6 +3,7 @@ import AVFoundation
 
 struct ModernHUDView: View {
     @EnvironmentObject var trackingManager: TrackingManager
+    @State private var settingsWindowController: SettingsWindowController?
     
     var body: some View {
         ZStack {
@@ -16,7 +17,7 @@ struct ModernHUDView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("INPUT TRACKING")
                         .font(.system(size: 12, weight: .semibold, design: .default))
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.primary)
                     
                     VStack(alignment: .leading, spacing: 4) {
                         MetricRow(label: "Mouse Clicks", value: trackingManager.mouseClicks, color: .blue)
@@ -39,7 +40,7 @@ struct ModernHUDView: View {
                             .buttonStyle(.plain)
                             
                             Button("Settings") {
-                                showSettingsDialog()
+                                showNativeSettings()
                             }
                             .font(.system(size: 10, weight: .medium))
                             .foregroundColor(.blue)
@@ -69,13 +70,13 @@ struct ModernHUDView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("GIT ACTIVITY")
                             .font(.system(size: 12, weight: .semibold, design: .default))
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.primary)
                         
                         VStack(alignment: .leading, spacing: 4) {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text("Last commit in:")
                                     .font(.system(size: 11, weight: .medium))
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.primary)
                                 Text(trackingManager.lastCommitProject)
                                     .font(.system(size: 13, weight: .semibold))
                                     .foregroundColor(.purple)
@@ -89,7 +90,7 @@ struct ModernHUDView: View {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text("Time since commit:")
                                     .font(.system(size: 11, weight: .medium))
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.primary)
                                 Text(trackingManager.timeSinceLastCommit)
                                     .font(.system(size: 13, weight: .bold, design: .monospaced))
                                     .foregroundColor(.orange)
@@ -102,13 +103,13 @@ struct ModernHUDView: View {
                     VStack(alignment: .trailing, spacing: 8) {
                         Text("SESSION")
                             .font(.system(size: 12, weight: .semibold, design: .default))
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.primary)
                         
                         VStack(alignment: .trailing, spacing: 4) {
                             HStack {
                                 Text("Duration")
                                     .font(.system(size: 12, weight: .medium))
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.primary)
                                 Text(trackingManager.sessionTime)
                                     .font(.system(size: 16, weight: .bold, design: .monospaced))
                                     .foregroundColor(.primary)
@@ -117,7 +118,7 @@ struct ModernHUDView: View {
                             HStack {
                                 Text("Status")
                                     .font(.system(size: 12, weight: .medium))
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.primary)
                                 Text(trackingManager.isTracking ? "Active" : "Paused")
                                     .font(.system(size: 12, weight: .semibold))
                                     .foregroundColor(trackingManager.isTracking ? .green : .red)
@@ -126,7 +127,7 @@ struct ModernHUDView: View {
                             HStack {
                                 Text("Camera")
                                     .font(.system(size: 12, weight: .medium))
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.primary)
                                 Text(trackingManager.cameraStatus)
                                     .font(.system(size: 12, weight: .semibold))
                                     .foregroundColor(trackingManager.hasCameraAccess ? .green : .red)
@@ -135,7 +136,7 @@ struct ModernHUDView: View {
                             HStack {
                                 Text("Screenshots")
                                     .font(.system(size: 12, weight: .medium))
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.primary)
                                 Text("\(trackingManager.screenshotCount)")
                                     .font(.system(size: 12, weight: .bold, design: .monospaced))
                                     .foregroundColor(.blue)
@@ -187,6 +188,9 @@ struct ModernHUDView: View {
         window.titlebarAppearsTransparent = true
         window.titleVisibility = .hidden
         window.styleMask = [.borderless] // Remove all window chrome
+        window.standardWindowButton(.closeButton)?.isHidden = true
+        window.standardWindowButton(.miniaturizeButton)?.isHidden = true
+        window.standardWindowButton(.zoomButton)?.isHidden = true
         window.isMovable = false
         window.backgroundColor = .clear
         window.isOpaque = false
@@ -286,6 +290,13 @@ struct ModernHUDView: View {
         }
     }
     
+    private func showNativeSettings() {
+        if settingsWindowController == nil {
+            settingsWindowController = SettingsWindowController(trackingManager: trackingManager)
+        }
+        settingsWindowController?.showSettings()
+    }
+    
     private func showSettingsDialog() {
         let alert = NSAlert()
         alert.messageText = "DoomHUD Settings"
@@ -352,7 +363,7 @@ struct MetricRow: View {
         HStack {
             Text(label)
                 .font(.system(size: 12, weight: .medium))
-                .foregroundColor(.secondary)
+                .foregroundColor(.primary)
             
             Spacer()
             

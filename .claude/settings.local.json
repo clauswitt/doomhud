@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./run_with_logs.sh:*)",
+      "Bash(pkill:*)",
+      "Bash(./build_app_signed.sh:*)",
+      "Bash(swift build:*)"
+    ],
+    "deny": []
+  }
+}
