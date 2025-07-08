@@ -1,41 +1,79 @@
 import SwiftUI
 import AppKit
 import AVFoundation
+import Combine
 
 @main
 struct DoomHUDApp: App {
-    @StateObject private var trackingManager = TrackingManager()
-    @StateObject private var appDelegate = AppDelegate()
+    @NSApplicationDelegateAdaptor(HUDAppDelegate.self) var appDelegate
     
-    init() {
+    var body: some Scene {
+        Settings {
+            EmptyView() // Required to avoid crash
+        }
+    }
+}
+
+class HUDAppDelegate: NSObject, NSApplicationDelegate {
+    var window: HUDWindow!
+    var trackingManager: TrackingManager!
+    private var cancellables = Set<AnyCancellable>()
+    
+    func applicationDidFinishLaunching(_ notification: Notification) {
         print("🎮 DoomHUD Starting...")
         print("🎮 Bundle path: \(Bundle.main.bundlePath)")
         print("🎮 Process: \(ProcessInfo.processInfo.processName)")
         
-        do {
-            // Set the app delegate FIRST, before anything else
-            NSApplication.shared.delegate = appDelegate
-            print("🎮 App delegate set")
-            
-            NSApplication.shared.setActivationPolicy(.accessory)
-            print("🎮 Activation policy set to accessory")
-        } catch {
-            print("❌ Error during initialization: \(error)")
-        }
+        // Set activation policy
+        NSApplication.shared.setActivationPolicy(.accessory)
+        print("🎮 Activation policy set to accessory")
+        
+        // Initialize tracking manager
+        trackingManager = TrackingManager()
+        
+        // Create the main content view
+        let contentView = ModernHUDView()
+            .environmentObject(trackingManager)
+        
+        // Create hosting controller
+        let hosting = NSHostingController(rootView: contentView)
+        
+        // Calculate window frame
+        let screen = NSScreen.main?.visibleFrame ?? NSRect(x: 0, y: 0, width: 800, height: 120)
+        let windowFrame = NSRect(
+            x: screen.midX - 400,
+            y: screen.minY + screen.height * 0.1,
+            width: 800,
+            height: 120
+        )
+        
+        // Create the HUD window
+        window = HUDWindow(
+            contentRect: windowFrame,
+            styleMask: [.borderless, .nonactivatingPanel],
+            backing: .buffered,
+            defer: false
+        )
+        
+        window.contentViewController = hosting
+        window.configure(with: trackingManager)
+        window.makeKeyAndOrderFront(nil)
+        
+        // Set up observer for alwaysOnTop changes
+        trackingManager.$alwaysOnTop
+            .sink { [weak self] _ in
+                self?.window.updateWindowLevel()
+            }
+            .store(in: &cancellables)
+        
+        // Trigger Input Monitoring permission
+        triggerInputMonitoringPermission()
+        
+        print("✅ HUD window created and displayed")
     }
     
-    var body: some Scene {
-        Window("DoomHUD", id: "main") {
-            ModernHUDView()
-                .environmentObject(trackingManager)
-        }
-        .windowResizability(.contentSize)
-    }
-}
-
-class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        print("🚀 App launched - triggering Input Monitoring permission")
+    private func triggerInputMonitoringPermission() {
+        print("🚀 Triggering Input Monitoring permission")
         
         // Create an event tap IMMEDIATELY to trigger the permission dialog
         let eventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.leftMouseDown.rawValue)

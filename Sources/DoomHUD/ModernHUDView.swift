@@ -345,17 +345,12 @@ struct ModernHUDView: View {
     }
     
     private func updateWindowLevel() {
-        guard let window = NSApplication.shared.windows.first else { return }
-        
-        if trackingManager.alwaysOnTop {
-            window.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.floatingWindow)))
-            window.collectionBehavior = [.canJoinAllSpaces, .stationary]
-            window.orderFrontRegardless()
-            print("🪟 Window level updated: floating (level \(window.level.rawValue))")
+        // Find the HUD window specifically
+        if let hudWindow = NSApplication.shared.windows.first(where: { $0 is HUDWindow }) as? HUDWindow {
+            hudWindow.updateWindowLevel()
+            print("🪟 HUD window level updated from ModernHUDView - Always on top: \(trackingManager.alwaysOnTop)")
         } else {
-            window.level = .normal
-            window.collectionBehavior = [.canJoinAllSpaces]
-            print("🪟 Window level updated: normal")
+            print("❌ Could not find HUD window to update level from ModernHUDView")
         }
     }
 }

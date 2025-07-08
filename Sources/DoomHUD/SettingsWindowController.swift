@@ -170,9 +170,13 @@ struct GeneralSettingsView: View {
     }
     
     private func updateWindowLevel() {
-        // This would need to communicate back to the HUD window
-        // For now, just update the setting - the HUD will pick it up
-        print("🪟 Always on top setting changed to: \(trackingManager.alwaysOnTop)")
+        // Find the HUD window and update its level
+        if let hudWindow = NSApplication.shared.windows.first(where: { $0 is HUDWindow }) as? HUDWindow {
+            hudWindow.updateWindowLevel()
+            print("🪟 HUD window level updated - Always on top: \(trackingManager.alwaysOnTop)")
+        } else {
+            print("❌ Could not find HUD window to update level")
+        }
     }
 }
 

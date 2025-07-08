@@ -11,7 +11,8 @@
       "Bash(echo:*)",
       "Bash(cat:*)",
       "Bash(./.build/debug/DoomHUD:*)",
-      "Bash(rg:*)"
+      "Bash(rg:*)",
+      "Bash(swift run:*)"
     ],
     "deny": []
   }

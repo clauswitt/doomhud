@@ -2,6 +2,8 @@ import SwiftUI
 import AppKit
 
 class HUDWindow: NSWindow {
+    var trackingManager: TrackingManager?
+    
     override init(
         contentRect: NSRect,
         styleMask style: NSWindow.StyleMask,
@@ -18,9 +20,13 @@ class HUDWindow: NSWindow {
         setupWindow()
     }
     
+    func configure(with trackingManager: TrackingManager) {
+        self.trackingManager = trackingManager
+        updateWindowLevel()
+    }
+    
     private func setupWindow() {
-        // Make window always on top
-        self.level = .floating
+        // Window level will be set by updateWindowLevel()
         
         // Make window non-activating (won't steal focus)
         self.collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle]
@@ -38,6 +44,16 @@ class HUDWindow: NSWindow {
         positionWindow()
     }
     
+    func updateWindowLevel() {
+        guard let trackingManager = trackingManager else { return }
+        
+        if trackingManager.alwaysOnTop {
+            self.level = .floating
+        } else {
+            self.level = .normal
+        }
+    }
+    
     private func positionWindow() {
         guard let screen = NSScreen.main else { return }
         
@@ -45,9 +61,9 @@ class HUDWindow: NSWindow {
         let windowWidth: CGFloat = 800
         let windowHeight: CGFloat = 120
         
-        // Position at bottom 20% of screen, centered horizontally
+        // Position closer to bottom of screen, centered horizontally
         let x = screenFrame.midX - (windowWidth / 2)
-        let y = screenFrame.minY + (screenFrame.height * 0.1) // 10% from bottom
+        let y = screenFrame.minY + 20 // 20 pixels from bottom
         
         self.setFrame(NSRect(x: x, y: y, width: windowWidth, height: windowHeight), display: true)
     }
@@ -85,52 +101,3 @@ class HUDWindow: NSWindow {
     }
 }
 
-// Custom WindowGroup for HUD
-struct HUDWindowGroup: Scene {
-    let content: AnyView
-    
-    init<Content: View>(@ViewBuilder content: () -> Content) {
-        self.content = AnyView(content())
-    }
-    
-    var body: some Scene {
-        WindowGroup {
-            content
-                .background(WindowAccessor())
-        }
-        .windowStyle(.hiddenTitleBar)
-        .windowResizability(.contentSize)
-    }
-}
-
-// Helper to access and configure the NSWindow
-struct WindowAccessor: NSViewRepresentable {
-    func makeNSView(context: Context) -> NSView {
-        let view = NSView()
-        
-        DispatchQueue.main.async {
-            if let window = view.window {
-                // Replace the default window with our HUD window
-                let hudWindow = HUDWindow(
-                    contentRect: window.frame,
-                    styleMask: window.styleMask,
-                    backing: window.backingType,
-                    defer: false
-                )
-                
-                // Transfer content
-                hudWindow.contentView = window.contentView
-                
-                // Show the HUD window
-                hudWindow.makeKeyAndOrderFront(nil)
-                
-                // Hide the original window
-                window.orderOut(nil)
-            }
-        }
-        
-        return view
-    }
-    
-    func updateNSView(_ nsView: NSView, context: Context) {}
-}
