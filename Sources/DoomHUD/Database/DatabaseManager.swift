@@ -358,4 +358,101 @@ class DatabaseManager: ObservableObject {
             return []
         }
     }
+    
+    // MARK: - Time-based Metric Queries
+    
+    func getMetricsForToday() -> MetricValues {
+        guard let db = db else { return .zero }
+        
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: Date())
+        
+        return getMetricsForDateRange(from: startOfDay, to: Date())
+    }
+    
+    func getMetricsForCurrentWeek() -> MetricValues {
+        guard let db = db else { return .zero }
+        
+        let calendar = Calendar.current
+        guard let weekInterval = calendar.dateInterval(of: .weekOfYear, for: Date()) else {
+            return .zero
+        }
+        
+        return getMetricsForDateRange(from: weekInterval.start, to: Date())
+    }
+    
+    func getMetricsForDateRange(from startDate: Date, to endDate: Date) -> MetricValues {
+        guard let db = db else { return .zero }
+        
+        do {
+            // Get metrics within date range
+            let metricsQuery = metricsTable.filter(
+                metricTimestamp >= startDate && metricTimestamp <= endDate
+            )
+            
+            var totalMouseClicks = 0
+            var totalKeystrokes = 0
+            var totalContextShifts = 0
+            var totalGitCommits = 0
+            
+            // Sum up all metrics
+            for row in try db.prepare(metricsQuery) {
+                totalMouseClicks += row[mouseClicks]
+                totalKeystrokes += row[keystrokes]
+                totalContextShifts += row[contextShifts]
+                totalGitCommits += row[gitCommits]
+            }
+            
+            // Get screenshot count for date range
+            let screenshotQuery = screenshotsTable.filter(
+                screenshotTimestamp >= startDate && screenshotTimestamp <= endDate
+            )
+            let screenshotCount = try db.scalar(screenshotQuery.count)
+            
+            // Calculate duration from sessions
+            let sessionQuery = sessionsTable.filter(
+                startTime >= startDate || (endTime != nil && endTime >= startDate)
+            )
+            
+            var totalDuration: TimeInterval = 0
+            for row in try db.prepare(sessionQuery) {
+                let sessionStart = max(row[startTime], startDate)
+                let sessionEnd = row[endTime] ?? Date()
+                let effectiveEnd = min(sessionEnd, endDate)
+                
+                if effectiveEnd > sessionStart {
+                    totalDuration += effectiveEnd.timeIntervalSince(sessionStart)
+                }
+            }
+            
+            return MetricValues(
+                mouseClicks: totalMouseClicks,
+                keystrokes: totalKeystrokes,
+                contextShifts: totalContextShifts,
+                gitCommits: totalGitCommits,
+                screenshots: screenshotCount,
+                duration: totalDuration
+            )
+            
+        } catch {
+            print("Failed to get metrics for date range: \(error)")
+            return .zero
+        }
+    }
+    
+    // Save current session metrics
+    func saveCurrentMetrics(sessionId: UUID, metrics: MetricValues) {
+        guard let db = db else { return }
+        
+        let metric = MetricData(
+            mouseClicks: metrics.mouseClicks,
+            keystrokes: metrics.keystrokes,
+            contextShifts: metrics.contextShifts,
+            gitCommits: metrics.gitCommits,
+            sessionId: sessionId,
+            isActive: true
+        )
+        
+        saveMetric(metric)
+    }
 }

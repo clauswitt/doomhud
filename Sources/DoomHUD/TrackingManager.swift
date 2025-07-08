@@ -52,6 +52,14 @@ class TrackingManager: ObservableObject {
     @Published var quitHotkey = HotkeyConfig(keyCode: kVK_ANSI_Q, modifiers: [.command, .control, .option])
     @Published var showHideHotkey = HotkeyConfig(keyCode: kVK_ANSI_O, modifiers: [.command, .control, .option])
     
+    // Multi-period metrics
+    @Published var metricsForPeriods = MetricPeriods.zero
+    private var currentSessionId = UUID()
+    private var databaseManager = DatabaseManager()
+    private var metricsSaveTimer: Timer?
+    private var lastSavedMetrics = MetricValues.zero
+    private var sessionStartGitCommits = 0  // Git commits at session start
+    
     // Computed property for overall permission status
     var allPermissionsGranted: Bool {
         return hasAccessibilityPermission && hasInputMonitoringPermission && hasCameraAccess && hasScreenRecordingPermission
@@ -154,6 +162,15 @@ class TrackingManager: ObservableObject {
             
             // Mark as initialized to enable settings updates
             isInitialized = true
+            
+            // Start periodic metrics saving
+            startMetricsSaving()
+            
+            // Create session in database
+            createDatabaseSession()
+            
+            // Load today and week metrics
+            loadHistoricalMetrics()
         } catch {
             print("❌ Error during TrackingManager initialization: \(error)")
             // Still mark as initialized even if there's an error
@@ -164,6 +181,9 @@ class TrackingManager: ObservableObject {
     deinit {
         stopTracking()
         initialScanTask?.cancel()
+        // Save final metrics before shutting down
+        saveCurrentMetrics()
+        metricsSaveTimer?.invalidate()
     }
     
     private func setupSessionTimer() {
@@ -523,6 +543,7 @@ class TrackingManager: ObservableObject {
                     let manager = Unmanaged<TrackingManager>.fromOpaque(refcon).takeUnretainedValue()
                     DispatchQueue.main.async {
                         manager.mouseClicks += 1
+                        manager.updateMetricsForPeriods()
                         print("🖱️ Mouse click detected! Total: \(manager.mouseClicks)")
                     }
                 }
@@ -565,6 +586,7 @@ class TrackingManager: ObservableObject {
                     let manager = Unmanaged<TrackingManager>.fromOpaque(refcon).takeUnretainedValue()
                     DispatchQueue.main.async {
                         manager.keystrokes += 1
+                        manager.updateMetricsForPeriods()
                         print("⌨️ Keystroke detected! Total: \(manager.keystrokes)")
                     }
                 }
@@ -614,6 +636,7 @@ class TrackingManager: ObservableObject {
         
         if let currentApp = currentApp, currentApp.bundleIdentifier != newApp.bundleIdentifier {
             contextShifts += 1
+            updateMetricsForPeriods()
         }
         
         currentApp = newApp
@@ -703,6 +726,17 @@ class TrackingManager: ObservableObject {
                 DispatchQueue.main.async {
                     self.screenshotCount += 1
                     self.lastScreenshotTime = Date()
+                    
+                    // Save screenshot record to database
+                    let screenshot = Screenshot(
+                        filePath: filePath.path,
+                        sessionId: self.currentSessionId,
+                        isMotionDetected: false,
+                        fileSize: 0
+                    )
+                    self.databaseManager.saveScreenshot(screenshot)
+                    
+                    self.updateMetricsForPeriods()
                     print("📸 Screenshot saved: \(filename) (Total: \(self.screenshotCount))")
                     print("📁 Saved to: \(filePath.path)")
                 }
@@ -741,6 +775,7 @@ class TrackingManager: ObservableObject {
             DispatchQueue.main.async {
                 self.screenshotCount += 1
                 self.lastScreenshotTime = Date()
+                self.updateMetricsForPeriods()
                 print("📸 Display screenshot saved: \(filename) (Total: \(self.screenshotCount))")
                 print("📁 Saved to: \(filePath.path)")
             }
@@ -899,6 +934,7 @@ extension TrackingManager {
             DispatchQueue.main.async {
                 self.gitCommits += totalNewCommits
                 self.lastCommitTime = Date()
+                self.updateMetricsForPeriods()
                 
                 if let repo = latestCommitRepo {
                     // Use project mapping manager to get display name
@@ -980,20 +1016,26 @@ extension TrackingManager {
             }
         }
         
-        // Update UI on main thread if we found commits from today
+        // Set baseline for today's commits (don't add to session, just track for future comparison)
         if totalTodaysCommits > 0, let commitTime = latestCommitTime, let commitRepo = latestCommitRepo {
-            let commitsCount = totalTodaysCommits // Capture for concurrency safety
+            let commitsCount = totalTodaysCommits // Capture to avoid concurrency issues
             await MainActor.run {
-                // Only update if this scan isn't cancelled and no new commits came in during scan
                 if !Task.isCancelled {
-                    print("🎉 Found \(commitsCount) commits from today, latest at \(commitTime)")
-                    self.gitCommits += commitsCount
+                    print("🎉 Found \(commitsCount) existing commits from today")
+                    // Set starting point - these commits happened before this session started
+                    self.sessionStartGitCommits = commitsCount
                     self.lastCommitTime = commitTime
                     self.lastCommitProject = self.projectMappingManager.getDisplayName(for: commitRepo.path)
+                    
+                    // Update periods to show today's data without inflating session
+                    self.updateMetricsForPeriods()
                 }
             }
         } else {
             print("🔍 No commits found from today")
+            await MainActor.run {
+                self.sessionStartGitCommits = 0
+            }
         }
     }
     
@@ -1191,6 +1233,98 @@ extension TrackingManager {
     
     @objc private func quitFromMenu() {
         NSApplication.shared.terminate(nil)
+    }
+    
+    // MARK: - Multi-Period Metrics Management
+    
+    private func updateMetricsForPeriods() {
+        // Update session metrics
+        let sessionMetrics = MetricValues(
+            mouseClicks: mouseClicks,
+            keystrokes: keystrokes,
+            contextShifts: contextShifts,
+            gitCommits: gitCommits,
+            screenshots: screenshotCount,
+            duration: Date().timeIntervalSince(startTime)
+        )
+        
+        // Get historical metrics from database
+        let historicalTodayMetrics = databaseManager.getMetricsForToday()
+        let historicalWeekMetrics = databaseManager.getMetricsForCurrentWeek()
+        
+        // Add current session values to today and week totals
+        let todayMetrics = MetricValues(
+            mouseClicks: historicalTodayMetrics.mouseClicks + mouseClicks,
+            keystrokes: historicalTodayMetrics.keystrokes + keystrokes,
+            contextShifts: historicalTodayMetrics.contextShifts + contextShifts,
+            gitCommits: historicalTodayMetrics.gitCommits + gitCommits,
+            screenshots: historicalTodayMetrics.screenshots + screenshotCount,
+            duration: historicalTodayMetrics.duration + Date().timeIntervalSince(startTime)
+        )
+        
+        let weekMetrics = MetricValues(
+            mouseClicks: historicalWeekMetrics.mouseClicks + mouseClicks,
+            keystrokes: historicalWeekMetrics.keystrokes + keystrokes,
+            contextShifts: historicalWeekMetrics.contextShifts + contextShifts,
+            gitCommits: historicalWeekMetrics.gitCommits + gitCommits,
+            screenshots: historicalWeekMetrics.screenshots + screenshotCount,
+            duration: historicalWeekMetrics.duration + Date().timeIntervalSince(startTime)
+        )
+        
+        // Update published property
+        DispatchQueue.main.async {
+            self.metricsForPeriods = MetricPeriods(
+                session: sessionMetrics,
+                today: todayMetrics,
+                week: weekMetrics
+            )
+        }
+    }
+    
+    private func loadHistoricalMetrics() {
+        print("📊 Loading historical metrics...")
+        updateMetricsForPeriods()
+    }
+    
+    private func startMetricsSaving() {
+        // Save metrics every 60 seconds
+        metricsSaveTimer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { _ in
+            self.saveCurrentMetrics()
+        }
+        print("💾 Started periodic metrics saving (every 60s)")
+    }
+    
+    func saveCurrentMetrics() {
+        let currentMetrics = MetricValues(
+            mouseClicks: mouseClicks,
+            keystrokes: keystrokes,
+            contextShifts: contextShifts,
+            gitCommits: gitCommits,
+            screenshots: screenshotCount,
+            duration: Date().timeIntervalSince(startTime)
+        )
+        
+        // Only save if metrics have changed
+        if currentMetrics.mouseClicks != lastSavedMetrics.mouseClicks ||
+           currentMetrics.keystrokes != lastSavedMetrics.keystrokes ||
+           currentMetrics.contextShifts != lastSavedMetrics.contextShifts ||
+           currentMetrics.gitCommits != lastSavedMetrics.gitCommits ||
+           currentMetrics.screenshots != lastSavedMetrics.screenshots {
+            
+            databaseManager.saveCurrentMetrics(sessionId: currentSessionId, metrics: currentMetrics)
+            lastSavedMetrics = currentMetrics
+            print("💾 Saved current metrics to database")
+            
+            // Update the periods after saving
+            updateMetricsForPeriods()
+        }
+    }
+    
+    private func createDatabaseSession() {
+        let session = Session()
+        currentSessionId = session.id
+        databaseManager.saveSession(session)
+        print("📊 Created new session in database: \(currentSessionId)")
     }
     
 }

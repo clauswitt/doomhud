@@ -94,3 +94,35 @@ struct TimelapseVideo: Codable, Identifiable {
         self.fileSize = fileSize
     }
 }
+
+// MARK: - Multi-Period Metrics
+
+struct MetricValues: Codable {
+    let mouseClicks: Int
+    let keystrokes: Int
+    let contextShifts: Int
+    let gitCommits: Int
+    let screenshots: Int
+    let duration: TimeInterval
+    
+    static let zero = MetricValues(
+        mouseClicks: 0,
+        keystrokes: 0,
+        contextShifts: 0,
+        gitCommits: 0,
+        screenshots: 0,
+        duration: 0
+    )
+}
+
+struct MetricPeriods: Codable {
+    let session: MetricValues
+    let today: MetricValues
+    let week: MetricValues
+    
+    static let zero = MetricPeriods(
+        session: .zero,
+        today: .zero,
+        week: .zero
+    )
+}

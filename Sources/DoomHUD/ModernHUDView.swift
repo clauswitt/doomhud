@@ -4,6 +4,13 @@ import AVFoundation
 struct ModernHUDView: View {
     @EnvironmentObject var trackingManager: TrackingManager
     @State private var settingsWindowController: SettingsWindowController?
+    @State private var selectedPeriod: TimePeriod = .session
+    
+    enum TimePeriod: String, CaseIterable {
+        case session = "SESSION"
+        case today = "TODAY"
+        case week = "WEEK"
+    }
     
     var body: some View {
         ZStack {
@@ -20,10 +27,53 @@ struct ModernHUDView: View {
                         .foregroundColor(.secondary)
                     
                     VStack(alignment: .leading, spacing: 4) {
-                        MetricRow(label: "Mouse Clicks", value: trackingManager.mouseClicks, color: .blue)
-                        MetricRow(label: "Keystrokes", value: trackingManager.keystrokes, color: .green)
-                        MetricRow(label: "Context Shifts", value: trackingManager.contextShifts, color: .orange)
-                        MetricRow(label: "Git Commits", value: trackingManager.gitCommits, color: .purple)
+                        // Header row
+                        HStack(spacing: 0) {
+                            Text("")
+                                .frame(width: 100, alignment: .leading)
+                            Text("Session")
+                                .font(.system(size: 10, weight: .medium))
+                                .foregroundColor(.secondary)
+                                .frame(width: 60, alignment: .trailing)
+                            Text("Today")
+                                .font(.system(size: 10, weight: .medium))
+                                .foregroundColor(.secondary)
+                                .frame(width: 60, alignment: .trailing)
+                            Text("Week")
+                                .font(.system(size: 10, weight: .medium))
+                                .foregroundColor(.secondary)
+                                .frame(width: 60, alignment: .trailing)
+                        }
+                        .padding(.bottom, 2)
+                        
+                        MetricRowMultiPeriod(
+                            label: "Mouse Clicks",
+                            sessionValue: trackingManager.metricsForPeriods.session.mouseClicks,
+                            todayValue: trackingManager.metricsForPeriods.today.mouseClicks,
+                            weekValue: trackingManager.metricsForPeriods.week.mouseClicks,
+                            color: .blue
+                        )
+                        MetricRowMultiPeriod(
+                            label: "Keystrokes",
+                            sessionValue: trackingManager.metricsForPeriods.session.keystrokes,
+                            todayValue: trackingManager.metricsForPeriods.today.keystrokes,
+                            weekValue: trackingManager.metricsForPeriods.week.keystrokes,
+                            color: .green
+                        )
+                        MetricRowMultiPeriod(
+                            label: "Context Shifts",
+                            sessionValue: trackingManager.metricsForPeriods.session.contextShifts,
+                            todayValue: trackingManager.metricsForPeriods.today.contextShifts,
+                            weekValue: trackingManager.metricsForPeriods.week.contextShifts,
+                            color: .orange
+                        )
+                        MetricRowMultiPeriod(
+                            label: "Git Commits",
+                            sessionValue: trackingManager.metricsForPeriods.session.gitCommits,
+                            todayValue: trackingManager.metricsForPeriods.today.gitCommits,
+                            weekValue: trackingManager.metricsForPeriods.week.gitCommits,
+                            color: .purple
+                        )
                         
                         // Control buttons
                         HStack(spacing: 6) {
@@ -101,16 +151,33 @@ struct ModernHUDView: View {
                     
                     // Session Info Section
                     VStack(alignment: .trailing, spacing: 8) {
-                        Text("SESSION")
-                            .font(.system(size: 12, weight: .semibold, design: .default))
+                        Button(action: {
+                            // Cycle through periods
+                            switch selectedPeriod {
+                            case .session:
+                                selectedPeriod = .today
+                            case .today:
+                                selectedPeriod = .week
+                            case .week:
+                                selectedPeriod = .session
+                            }
+                        }) {
+                            HStack(spacing: 4) {
+                                Text(selectedPeriod.rawValue)
+                                    .font(.system(size: 12, weight: .semibold, design: .default))
+                                Image(systemName: "chevron.down")
+                                    .font(.system(size: 10))
+                            }
                             .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.plain)
                         
                         VStack(alignment: .trailing, spacing: 4) {
                             HStack {
                                 Text("Duration")
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundColor(.secondary)
-                                Text(trackingManager.sessionTime)
+                                Text(formattedDuration(for: selectedPeriod))
                                     .font(.system(size: 16, weight: .bold, design: .monospaced))
                                     .foregroundColor(.primary)
                             }
@@ -351,6 +418,74 @@ struct ModernHUDView: View {
             print("🪟 HUD window level updated from ModernHUDView - Always on top: \(trackingManager.alwaysOnTop)")
         } else {
             print("❌ Could not find HUD window to update level from ModernHUDView")
+        }
+    }
+    
+    private func formattedDuration(for period: TimePeriod) -> String {
+        switch period {
+        case .session:
+            // Use the real-time session timer for smooth updates
+            return trackingManager.sessionTime
+        case .today:
+            let duration = trackingManager.metricsForPeriods.today.duration
+            return formatDuration(duration)
+        case .week:
+            let duration = trackingManager.metricsForPeriods.week.duration
+            return formatDuration(duration)
+        }
+    }
+    
+    private func formatDuration(_ duration: TimeInterval) -> String {
+        let hours = Int(duration) / 3600
+        let minutes = Int(duration) % 3600 / 60
+        let seconds = Int(duration) % 60
+        
+        if hours > 0 {
+            return String(format: "%d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            return String(format: "%02d:%02d", minutes, seconds)
+        }
+    }
+}
+
+struct MetricRowMultiPeriod: View {
+    let label: String
+    let sessionValue: Int
+    let todayValue: Int
+    let weekValue: Int
+    let color: Color
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            Text(label)
+                .font(.system(size: 12, weight: .medium))
+                .foregroundColor(.secondary)
+                .frame(width: 100, alignment: .leading)
+            
+            Text(formatNumber(sessionValue))
+                .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                .foregroundColor(color)
+                .frame(width: 60, alignment: .trailing)
+            
+            Text(formatNumber(todayValue))
+                .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                .foregroundColor(color.opacity(0.8))
+                .frame(width: 60, alignment: .trailing)
+            
+            Text(formatNumber(weekValue))
+                .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                .foregroundColor(color.opacity(0.6))
+                .frame(width: 60, alignment: .trailing)
+        }
+    }
+    
+    private func formatNumber(_ value: Int) -> String {
+        if value >= 1_000_000 {
+            return String(format: "%.1fM", Double(value) / 1_000_000)
+        } else if value >= 1_000 {
+            return String(format: "%.1fK", Double(value) / 1_000)
+        } else {
+            return "\(value)"
         }
     }
 }

@@ -113,5 +113,11 @@ class HUDAppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return false // Keep app running
     }
+    
+    func applicationWillTerminate(_ notification: Notification) {
+        // Save final metrics before quitting
+        trackingManager.saveCurrentMetrics()
+        print("💾 Saved final metrics before quit")
+    }
 }
 
