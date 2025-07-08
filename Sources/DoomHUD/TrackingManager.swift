@@ -46,10 +46,10 @@ class TrackingManager: ObservableObject {
     private var isInitialized = false
     
     // Hotkey settings
-    @Published var pauseHotkey = HotkeyConfig(keyCode: kVK_ANSI_P, modifiers: [.command, .shift])
-    @Published var screenshotHotkey = HotkeyConfig(keyCode: kVK_ANSI_R, modifiers: [.command, .shift]) 
-    @Published var openFolderHotkey = HotkeyConfig(keyCode: kVK_ANSI_T, modifiers: [.command, .shift])
-    @Published var quitHotkey = HotkeyConfig(keyCode: kVK_ANSI_Q, modifiers: [.command, .shift])
+    @Published var pauseHotkey = HotkeyConfig(keyCode: kVK_ANSI_P, modifiers: [.command, .control, .option])
+    @Published var screenshotHotkey = HotkeyConfig(keyCode: kVK_ANSI_R, modifiers: [.command, .control, .option]) 
+    @Published var openFolderHotkey = HotkeyConfig(keyCode: kVK_ANSI_T, modifiers: [.command, .control, .option])
+    @Published var quitHotkey = HotkeyConfig(keyCode: kVK_ANSI_Q, modifiers: [.command, .control, .option])
     
     // Computed property for overall permission status
     var allPermissionsGranted: Bool {
@@ -1150,7 +1150,7 @@ extension TrackingManager {
         menu.addItem(NSMenuItem.separator())
         
         let quitItem = NSMenuItem(title: "Quit DoomHUD", action: #selector(quitFromMenu), keyEquivalent: "q")
-        quitItem.keyEquivalentModifierMask = [.command, .shift]
+        quitItem.keyEquivalentModifierMask = [.command, .control, .option]
         quitItem.target = self
         menu.addItem(quitItem)
         

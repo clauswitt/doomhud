@@ -97,12 +97,12 @@ class MenuBarManager: ObservableObject {
         if let coordinator = trackingCoordinator {
             if coordinator.isTracking {
                 let pauseItem = NSMenuItem(title: "Pause Tracking", action: #selector(pauseTracking), keyEquivalent: "p")
-                pauseItem.keyEquivalentModifierMask = [.command, .shift]
+                pauseItem.keyEquivalentModifierMask = [.command, .control, .option]
                 pauseItem.target = self
                 menu.addItem(pauseItem)
             } else {
                 let resumeItem = NSMenuItem(title: "Resume Tracking", action: #selector(resumeTracking), keyEquivalent: "r")
-                resumeItem.keyEquivalentModifierMask = [.command, .shift]
+                resumeItem.keyEquivalentModifierMask = [.command, .control, .option]
                 resumeItem.target = self
                 menu.addItem(resumeItem)
             }
@@ -143,7 +143,7 @@ class MenuBarManager: ObservableObject {
                 menu.addItem(progressItem)
             } else {
                 let timelapseItem = NSMenuItem(title: "Generate Timelapse", action: #selector(generateTimelapse), keyEquivalent: "t")
-                timelapseItem.keyEquivalentModifierMask = [.command, .shift]
+                timelapseItem.keyEquivalentModifierMask = [.command, .control, .option]
                 timelapseItem.target = self
                 menu.addItem(timelapseItem)
                 
@@ -179,7 +179,7 @@ class MenuBarManager: ObservableObject {
         
         // Quit
         let quitItem = NSMenuItem(title: "Quit DoomHUD", action: #selector(quitApplication), keyEquivalent: "q")
-        quitItem.keyEquivalentModifierMask = [.command, .shift]
+        quitItem.keyEquivalentModifierMask = [.command, .control, .option]
         quitItem.target = self
         menu.addItem(quitItem)
         
@@ -264,10 +264,10 @@ class MenuBarManager: ObservableObject {
         let alert = NSAlert()
         alert.messageText = "Keyboard Shortcuts"
         alert.informativeText = """
-        ⌘⇧P - Pause Tracking
-        ⌘⇧R - Resume Tracking
-        ⌘⇧T - Generate Timelapse
-        ⌘⇧Q - Quit Application
+        ⌘⌃⌥P - Pause Tracking
+        ⌘⌃⌥R - Resume Tracking
+        ⌘⌃⌥T - Generate Timelapse
+        ⌘⌃⌥Q - Quit Application
         """
         alert.addButton(withTitle: "OK")
         alert.runModal()
