@@ -36,49 +36,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-swift-
           
-    - name: Import signing certificate
-      if: secrets.MACOS_CERTIFICATE_P12
-      env:
-        MACOS_CERTIFICATE_P12: ${{ secrets.MACOS_CERTIFICATE_P12 }}
-        MACOS_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
-        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-      run: |
-        # Create keychain
-        security create-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
-        security default-keychain -s build.keychain
-        security unlock-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
-        
-        # Import certificate
-        echo "$MACOS_CERTIFICATE_P12" | base64 --decode > certificate.p12
-        security import certificate.p12 -k build.keychain -P "$MACOS_CERTIFICATE_PASSWORD" -T /usr/bin/codesign
-        
-        # Set key partition list
-        security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" build.keychain
-        
-        # Clean up
-        rm certificate.p12
-        
     - name: Build app
-      env:
-        MACOS_CERTIFICATE_P12: ${{ secrets.MACOS_CERTIFICATE_P12 }}
       run: |
         # Make build script executable
         chmod +x build_app_signed.sh
         
-        # Modify build script to work in CI environment
-        if [ -n "${MACOS_CERTIFICATE_P12:-}" ]; then
-          # Use certificate from secrets if available
-          export SIGNING_IDENTITY="${{ secrets.MACOS_CERTIFICATE_NAME }}"
-          
-          # Create modified build script for CI
-          sed 's/CERT_NAME="DoomHUD Developer"/CERT_NAME="${{ secrets.MACOS_CERTIFICATE_NAME }}"/' build_app_signed.sh > build_ci.sh
-          chmod +x build_ci.sh
-          ./build_ci.sh
-        else
-          # Use ad-hoc signing if no certificate
-          echo "No signing certificate provided, using ad-hoc signing"
-          ./build_app_signed.sh
-        fi
+        # Build with ad-hoc signing (no certificate configured)
+        echo "Using ad-hoc signing"
+        ./build_app_signed.sh
         
     - name: Create ZIP archive
       run: |
