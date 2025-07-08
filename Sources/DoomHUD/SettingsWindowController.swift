@@ -530,25 +530,31 @@ struct HotkeySettingsView: View {
                         HotkeyRow(
                             title: "Toggle Tracking", 
                             description: "Pause or resume all tracking",
-                            hotkey: hotkeys["Pause Tracking"] ?? "⌘⇧P"
+                            hotkey: hotkeys["Pause Tracking"] ?? "⌘⌃⌥P"
                         )
                         
                         HotkeyRow(
                             title: "Take Screenshot",
                             description: "Capture a screenshot immediately", 
-                            hotkey: hotkeys["Resume Tracking"] ?? "⌘⇧R"
+                            hotkey: hotkeys["Take Screenshot"] ?? "⌘⌃⌥R"
                         )
                         
                         HotkeyRow(
                             title: "Open Screenshots",
                             description: "Open screenshots folder in Finder",
-                            hotkey: hotkeys["Generate Timelapse"] ?? "⌘⇧T"
+                            hotkey: hotkeys["Open Screenshots"] ?? "⌘⌃⌥T"
+                        )
+                        
+                        HotkeyRow(
+                            title: "Show/Hide HUD",
+                            description: "Toggle HUD window visibility",
+                            hotkey: hotkeys["Show/Hide HUD"] ?? "⌘⌃⌥O"
                         )
                         
                         HotkeyRow(
                             title: "Quit DoomHUD",
                             description: "Exit the application completely",
-                            hotkey: hotkeys["Quit Application"] ?? "⌘⇧Q"
+                            hotkey: hotkeys["Quit Application"] ?? "⌘⌃⌥Q"
                         )
                     } else {
                         Text("Hotkey system not initialized")

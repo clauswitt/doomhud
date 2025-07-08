@@ -265,8 +265,9 @@ class MenuBarManager: ObservableObject {
         alert.messageText = "Keyboard Shortcuts"
         alert.informativeText = """
         ⌘⌃⌥P - Pause Tracking
-        ⌘⌃⌥R - Resume Tracking
-        ⌘⌃⌥T - Generate Timelapse
+        ⌘⌃⌥R - Resume Tracking / Take Screenshot
+        ⌘⌃⌥T - Open Screenshots / Generate Timelapse
+        ⌘⌃⌥O - Show/Hide HUD
         ⌘⌃⌥Q - Quit Application
         """
         alert.addButton(withTitle: "OK")

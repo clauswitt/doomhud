@@ -103,6 +103,9 @@ class HotkeyManager: ObservableObject {
                 case "quit":
                     testHotkeyID.signature = OSType(0x51554954)
                     testHotkeyID.id = 4
+                case "showhide":
+                    testHotkeyID.signature = OSType(0x53484944) // 'SHID'
+                    testHotkeyID.id = 5
                 default:
                     continue
                 }
@@ -126,7 +129,8 @@ class HotkeyManager: ObservableObject {
         pauseConfig: HotkeyConfig, pauseAction: @escaping () -> Void,
         screenshotConfig: HotkeyConfig, screenshotAction: @escaping () -> Void,
         openFolderConfig: HotkeyConfig, openFolderAction: @escaping () -> Void,
-        quitConfig: HotkeyConfig, quitAction: @escaping () -> Void
+        quitConfig: HotkeyConfig, quitAction: @escaping () -> Void,
+        showHideConfig: HotkeyConfig, showHideAction: @escaping () -> Void
     ) {
         // Clear existing hotkeys
         unregisterAllHotkeys()
@@ -136,12 +140,14 @@ class HotkeyManager: ObservableObject {
         hotkeyConfigs["screenshot"] = screenshotConfig
         hotkeyConfigs["openfolder"] = openFolderConfig
         hotkeyConfigs["quit"] = quitConfig
+        hotkeyConfigs["showhide"] = showHideConfig
         
         // Register new hotkeys
         registerHotkey(id: "pause", config: pauseConfig, action: pauseAction)
         registerHotkey(id: "screenshot", config: screenshotConfig, action: screenshotAction)
         registerHotkey(id: "openfolder", config: openFolderConfig, action: openFolderAction)
         registerHotkey(id: "quit", config: quitConfig, action: quitAction)
+        registerHotkey(id: "showhide", config: showHideConfig, action: showHideAction)
     }
     
     private func registerHotkey(id: String, config: HotkeyConfig, action: @escaping () -> Void) {
@@ -161,6 +167,9 @@ class HotkeyManager: ObservableObject {
         case "quit":
             hotkeyID.signature = OSType(0x51554954) // 'QUIT'
             hotkeyID.id = 4
+        case "showhide":
+            hotkeyID.signature = OSType(0x53484944) // 'SHID'
+            hotkeyID.id = 5
         default:
             hotkeyID.signature = OSType(0x44454641) // 'DEFA'
             hotkeyID.id = 99
@@ -219,7 +228,8 @@ class HotkeyManager: ObservableObject {
             "Pause Tracking": hotkeyConfigs["pause"]?.displayString ?? "Not configured",
             "Take Screenshot": hotkeyConfigs["screenshot"]?.displayString ?? "Not configured", 
             "Open Screenshots": hotkeyConfigs["openfolder"]?.displayString ?? "Not configured",
-            "Quit Application": hotkeyConfigs["quit"]?.displayString ?? "Not configured"
+            "Quit Application": hotkeyConfigs["quit"]?.displayString ?? "Not configured",
+            "Show/Hide HUD": hotkeyConfigs["showhide"]?.displayString ?? "Not configured"
         ]
     }
 }

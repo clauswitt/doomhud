@@ -50,6 +50,7 @@ class TrackingManager: ObservableObject {
     @Published var screenshotHotkey = HotkeyConfig(keyCode: kVK_ANSI_R, modifiers: [.command, .control, .option]) 
     @Published var openFolderHotkey = HotkeyConfig(keyCode: kVK_ANSI_T, modifiers: [.command, .control, .option])
     @Published var quitHotkey = HotkeyConfig(keyCode: kVK_ANSI_Q, modifiers: [.command, .control, .option])
+    @Published var showHideHotkey = HotkeyConfig(keyCode: kVK_ANSI_O, modifiers: [.command, .control, .option])
     
     // Computed property for overall permission status
     var allPermissionsGranted: Bool {
@@ -1109,6 +1110,13 @@ extension TrackingManager {
                 DispatchQueue.main.async {
                     NSApplication.shared.terminate(nil)
                 }
+            },
+            showHideConfig: showHideHotkey,
+            showHideAction: {
+                print("🔥 Hotkey: Show/Hide HUD")
+                DispatchQueue.main.async {
+                    self.toggleHUDVisibility()
+                }
             }
         )
         
@@ -1131,6 +1139,28 @@ extension TrackingManager {
     private func openScreenshotsFolder() {
         NSWorkspace.shared.open(screenshotsDirectory)
         print("📁 Opened screenshots folder")
+    }
+    
+    private func toggleHUDVisibility() {
+        if let hudWindow = NSApplication.shared.windows.first(where: { $0 is HUDWindow }) {
+            if hudWindow.isVisible {
+                hudWindow.orderOut(nil)
+                print("👻 HUD window hidden")
+            } else {
+                // Make window visible and bring to front
+                hudWindow.makeKeyAndOrderFront(nil)
+                hudWindow.orderFrontRegardless()
+                
+                // Ensure the window level is set correctly
+                if alwaysOnTop {
+                    hudWindow.level = .floating
+                }
+                
+                print("👁 HUD window shown and brought to front")
+            }
+        } else {
+            print("❌ Could not find HUD window to toggle visibility")
+        }
     }
     
     private func setupMenuBar() {
