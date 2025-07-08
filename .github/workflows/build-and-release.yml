@@ -37,7 +37,7 @@ jobs:
           ${{ runner.os }}-swift-
           
     - name: Import signing certificate
-      if: ${{ secrets.MACOS_CERTIFICATE_P12 != '' }}
+      if: ${{ secrets.MACOS_CERTIFICATE_P12 }}
       env:
         MACOS_CERTIFICATE_P12: ${{ secrets.MACOS_CERTIFICATE_P12 }}
         MACOS_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
@@ -59,12 +59,14 @@ jobs:
         rm certificate.p12
         
     - name: Build app
+      env:
+        MACOS_CERTIFICATE_P12: ${{ secrets.MACOS_CERTIFICATE_P12 }}
       run: |
         # Make build script executable
         chmod +x build_app_signed.sh
         
         # Modify build script to work in CI environment
-        if [ -n "${{ secrets.MACOS_CERTIFICATE_P12 }}" ]; then
+        if [ -n "${MACOS_CERTIFICATE_P12:-}" ]; then
           # Use certificate from secrets if available
           export SIGNING_IDENTITY="${{ secrets.MACOS_CERTIFICATE_NAME }}"
           
