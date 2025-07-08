@@ -933,12 +933,28 @@ extension TrackingManager {
             
             DispatchQueue.main.async {
                 self.gitCommits += totalNewCommits
-                self.lastCommitTime = Date()
                 self.updateMetricsForPeriods()
                 
                 if let repo = latestCommitRepo {
                     // Use project mapping manager to get display name
                     self.lastCommitProject = self.projectMappingManager.getDisplayName(for: repo.path)
+                    
+                    // Fetch actual commit time in background thread
+                    DispatchQueue.global(qos: .background).async {
+                        if let actualCommitTime = self.getLatestCommitTime(for: repo) {
+                            DispatchQueue.main.async {
+                                self.lastCommitTime = actualCommitTime
+                            }
+                        } else {
+                            // Fallback to detection time if we can't get actual commit time
+                            DispatchQueue.main.async {
+                                self.lastCommitTime = Date()
+                            }
+                        }
+                    }
+                } else {
+                    // Fallback to detection time if no latest repo
+                    self.lastCommitTime = Date()
                 }
                 
                 print("🎉 Total git commits: \(self.gitCommits)")
@@ -964,6 +980,33 @@ extension TrackingManager {
                 if let output = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines),
                    let count = Int(output) {
                     return count
+                }
+            }
+        } catch {
+            // Git command failed
+        }
+        
+        return nil
+    }
+    
+    private func getLatestCommitTime(for repoURL: URL) -> Date? {
+        let task = Process()
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/git")
+        task.arguments = ["-C", repoURL.path, "log", "-1", "--format=%ct"]
+        
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.standardError = Pipe() // Silence errors
+        
+        do {
+            try task.run()
+            task.waitUntilExit()
+            
+            if task.terminationStatus == 0 {
+                let data = pipe.fileHandleForReading.readDataToEndOfFile()
+                if let output = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines),
+                   let timestamp = TimeInterval(output) {
+                    return Date(timeIntervalSince1970: timestamp)
                 }
             }
         } catch {
