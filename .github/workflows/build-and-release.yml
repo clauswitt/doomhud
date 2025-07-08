@@ -37,7 +37,7 @@ jobs:
           ${{ runner.os }}-swift-
           
     - name: Import signing certificate
-      if: ${{ secrets.MACOS_CERTIFICATE_P12 }}
+      if: secrets.MACOS_CERTIFICATE_P12
       env:
         MACOS_CERTIFICATE_P12: ${{ secrets.MACOS_CERTIFICATE_P12 }}
         MACOS_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
